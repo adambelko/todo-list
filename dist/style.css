@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --white: #ffffff;
+    --light-grey: #e9e9e9;
+    --blue: #38bdf8;
+}
+
+html {
+    font-family: 'Pragati Narrow', sans-serif;
+    font-size: 62.5%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2.6rem;
+    background: var(--blue);
+}
+
+header > h1 {
+    padding: 2rem;
+}
+
+nav {
+    height: 100vh;
+    width: 330px;
+    background: var(--light-grey);
+}
+
+hr {
+    width: 90%;
+    border: 1px solid black;
+    margin-top: 1rem;
+}
+
+.nav_home,
+.nav_projects {
+    font-size: 2rem;
+    padding-top: 3rem;
+    padding-left: 2.5rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.nav-item_name {
+    padding-left: 1rem;
+    font-weight: 600;
+}
+
+
+
+
