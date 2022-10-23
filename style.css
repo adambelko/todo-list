@@ -7,7 +7,8 @@
     --white: #ffffff;
     --light-grey: #f7f7f7;
     --blue: #38bdf8;
-    --nav-hover: #7dd3fc;
+    --nav-text: #4d4d4d;
+    --nav-hover: #e3e2e2;
 }
 
 html {
@@ -40,13 +41,16 @@ header {
 
 /* ----- LEFT NAV PANEL ----- */
 nav {
+    display: flex;
+    flex-direction: column;
+    color: var(--nav-text);
     height: 100vh;
     width: 330px;
     background: var(--light-grey);
 }
 
 nav > h2 {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     padding-top: 3rem;
     padding-left: 2.5rem;
 }
@@ -58,7 +62,6 @@ nav > hr {
 
 .nav_home,
 .nav_projects {
-    font-size: 2rem;
     margin: 2rem 2rem;
     list-style: none;
 }
@@ -66,8 +69,8 @@ nav > hr {
 li a {
     display: flex;
     align-items: center;
+    color: var(--nav-text);
     text-decoration: none;
-    color: #000000;
 }
 
 li > a > img {
@@ -76,6 +79,8 @@ li > a > img {
 }
 
 .nav-item {
+    font-size: 1.8rem;
+    font-weight: bold;
     padding: 0.8rem 2rem 0.8rem 2rem;
     border-radius: 5px;
 }
@@ -83,3 +88,63 @@ li > a > img {
 .nav-item:hover {
     background: var(--nav-hover);
 }
+
+/* New Project Form Pop-Up */
+.nav_project-popup {
+    display: none;
+    height: 9rem;
+    margin: 2rem 2rem 0rem 2rem;
+    background-color: var(--nav-hover);
+    border-radius: 5px;
+}
+
+.nav_project-popup.active {
+    display: block;
+}
+
+.project-popup-input {
+    display: flex;
+    justify-content: center;
+}
+
+.project-popup-input > input {
+    height: 2.7rem;
+    width: 75%;
+    font-size: 1.8rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+.project-popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.project-popup-buttons > button {
+    font-size: 1.5rem;
+    width: 7.8rem;
+    color: var(--white);
+    font-weight: 600;
+    padding: 0.6rem;
+    border-radius: 5px;
+}
+
+.project-popup-add-btn {
+    background: #34d399;
+}
+
+.project-popup-add-btn:hover {
+    background: #3be0a4;
+}
+
+.project-popup-cancell-btn {
+    background: #fb7185;
+}
+
+.project-popup-cancell-btn:hover {
+    background: #f78495;
+}
+

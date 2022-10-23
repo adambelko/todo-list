@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css">
-    <title>ToDo Liste</title>
+    <title>ToDo List</title>
 </head>
 <body>
     <header>
@@ -23,25 +23,25 @@
         <hr>
         <ul class="nav_home">
             <li class="nav-item">
-                <a href="">
+                <a href="#">
                     <img src="./img/nav_inbox.png" alt="inbox">
                     Inbox
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="#">
                     <img src="./img/nav_today.png" alt="today">
                     Today
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="#">
                     <img src="./img/nav_calendar.png" alt="upcoming">
                     Upcoming
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="#">
                     <img src="./img/nav_priority.png" alt="important">
                     Important
                 </a>
@@ -49,15 +49,24 @@
         </ul>
         <h2>Projects</h2>
         <hr>
+        <div class="nav_project-popup">
+            <div class="project-popup-input">
+                <input type="text" placeholder="Enter new project">
+            </div>
+            <div class="project-popup-buttons">
+                <button class="project-popup-add-btn">Add</button>
+                <button class="project-popup-cancell-btn">Cancell</button>
+            </div>
+        </div>
         <ul class="nav_projects">
-            <li class="nav-item">
-                <a href="">
-                    <img src="./img/nav_plus-circle.png" alt="plus-circle">
+            <li class="nav-item add-new-project">
+                <a class="add-new-project" href="#">
+                    <img class="add-new-project" src="./img/nav_plus-circle.png" class="add-new-project" alt="plus-circle">
                     Add New Project
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="#">
                     <img src="./img/nav_project.png" alt="plus-circle">
                     Van fitout
                 </a>
