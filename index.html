@@ -13,61 +13,62 @@
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <img src="./img/header_check-outline.png" alt="check">
+        <div class="header__container">
+            <img class="header__img" src="./img/header_check-outline.png" alt="check">
             <h1>ToDo List</h1>
         </div>
     </header>
     <nav>
         <h2>Home</h2>
         <hr>
-        <ul class="nav_home">
-            <li class="nav-item">
+        <ul class="nav__section">
+            <li class="nav__item">
                 <a href="#">
-                    <img src="./img/nav_inbox.png" alt="inbox">
+                    <img class="nav__icon" src="./img/nav_inbox.png" alt="inbox">
                     Inbox
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav__item">
                 <a href="#">
-                    <img src="./img/nav_today.png" alt="today">
+                    <img class="nav__icon" src="./img/nav_today.png" alt="today">
                     Today
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav__item">
                 <a href="#">
-                    <img src="./img/nav_calendar.png" alt="upcoming">
+                    <img class="nav__icon" src="./img/nav_calendar.png" alt="upcoming">
                     Upcoming
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav__item">
                 <a href="#">
-                    <img src="./img/nav_priority.png" alt="important">
+                    <img class="nav__icon" src="./img/nav_priority.png" alt="important">
                     Important
                 </a>
             </li>
         </ul>
         <h2>Projects</h2>
         <hr>
-        <div class="nav_project-popup">
-            <div class="project-popup-input">
-                <input type="text" placeholder="Enter new project">
+        <!-- Hidden New Project Pop_up Form -->
+        <div class="nav__form">
+            <div class="nav__form-input-wrapper">
+                <input class="nav__form-input" type="text" placeholder="Enter new project">
             </div>
-            <div class="project-popup-buttons">
-                <button class="project-popup-add-btn">Add</button>
-                <button class="project-popup-cancell-btn">Cancell</button>
+            <div class="nav__form-buttons">
+                <button class="nav__form-add-btn">Add</button>
+                <button class="nav__form-cancell-btn">Cancell</button>
             </div>
         </div>
-        <ul class="nav_projects">
-            <li class="nav-item add-new-project">
-                <a class="add-new-project" href="#">
-                    <img class="add-new-project" src="./img/nav_plus-circle.png" class="add-new-project" alt="plus-circle">
+        <ul class="nav__section">
+            <li class="nav__item nav__add-new-project">
+                <a class="nav__add-new-project" href="#">
+                    <img class="nav__icon nav__add-new-project" src="./img/nav_plus-circle.png" class="add-new-project" alt="plus-circle">
                     Add New Project
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav__item">
                 <a href="#">
-                    <img src="./img/nav_project.png" alt="plus-circle">
+                    <img class="nav__icon" src="./img/nav_project.png" alt="plus-circle">
                     Van fitout
                 </a>
             </li>

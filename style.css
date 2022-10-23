@@ -27,14 +27,14 @@ header {
     background: var(--blue);
 }
 
-.header-container {
+.header__container {
     display: flex;
     align-items: center;
     padding: 2rem;
     gap: 2rem;
 }
 
-.header-container > img {
+.header__img {
     height: 50px;
     width: auto;
 }
@@ -43,10 +43,10 @@ header {
 nav {
     display: flex;
     flex-direction: column;
+    background: var(--light-grey);
     color: var(--nav-text);
     height: 100vh;
     width: 330px;
-    background: var(--light-grey);
 }
 
 nav > h2 {
@@ -60,9 +60,8 @@ nav > hr {
     margin: 1rem 2rem 0rem 2rem;
 }
 
-.nav_home,
-.nav_projects {
-    margin: 2rem 2rem;
+.nav__section {
+    margin: 1rem 2rem;
     list-style: none;
 }
 
@@ -73,24 +72,24 @@ li a {
     text-decoration: none;
 }
 
-li > a > img {
-    height: 33px;
-    padding-right: 1rem;
-}
-
-.nav-item {
+.nav__item {
     font-size: 1.8rem;
     font-weight: bold;
     padding: 0.8rem 2rem 0.8rem 2rem;
     border-radius: 5px;
 }
 
-.nav-item:hover {
+.nav__item:hover {
     background: var(--nav-hover);
 }
 
+.nav__icon {
+    height: 33px;
+    padding-right: 1rem;
+}
+
 /* New Project Form Pop-Up */
-.nav_project-popup {
+.nav__form {
     display: none;
     height: 9rem;
     margin: 2rem 2rem 0rem 2rem;
@@ -98,16 +97,16 @@ li > a > img {
     border-radius: 5px;
 }
 
-.nav_project-popup.active {
+.nav__form--active {
     display: block;
 }
 
-.project-popup-input {
+.nav__form-input-wrapper {
     display: flex;
     justify-content: center;
 }
 
-.project-popup-input > input {
+.nav__form-input {
     height: 2.7rem;
     width: 75%;
     font-size: 1.8rem;
@@ -116,14 +115,14 @@ li > a > img {
     border-radius: 5px;
 }
 
-.project-popup-buttons {
+.nav__form-buttons {
     display: flex;
     justify-content: center;
     gap: 2rem;
     margin-top: 1rem;
 }
 
-.project-popup-buttons > button {
+.nav__form-buttons > button {
     font-size: 1.5rem;
     width: 7.8rem;
     color: var(--white);
@@ -132,19 +131,19 @@ li > a > img {
     border-radius: 5px;
 }
 
-.project-popup-add-btn {
+.nav__form-add-btn {
     background: #34d399;
 }
 
-.project-popup-add-btn:hover {
+.nav__form-add-btn:hover {
     background: #3be0a4;
 }
 
-.project-popup-cancell-btn {
+.nav__form-cancell-btn {
     background: #fb7185;
 }
 
-.project-popup-cancell-btn:hover {
+.nav__formll-btn:hover {
     background: #f78495;
 }
 
