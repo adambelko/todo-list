@@ -1,27 +1,29 @@
 const loadEventListeners = () => {
-  const addNewProject = document.querySelectorAll(".add-new-project");
+  const addNewProject = document.querySelectorAll(".nav__add-new-project");
   addNewProject.forEach(el => el.addEventListener("click", showProjectForm));
 
-  const projectFormAddBtn = document.querySelector(".project-popup-add-btn");
-  projectFormAddBtn.addEventListener("click", addProject);
-
-  const projectFormCancellBtn = document.querySelector(".project-popup-cancell-btn");
+  const projectFormCancellBtn = document.querySelector(".nav__form-cancell-btn");
   projectFormCancellBtn.addEventListener("click", hideProjectForm);
+
+  const projectFormAddBtn = document.querySelector(".nav__form-add-btn");
+  projectFormAddBtn.addEventListener("click", addProject);
 };
 
 const showProjectForm = () => {
-  const projectForm = document.querySelector(".nav_project-popup");
-  projectForm.classList.add("active");
+  const projectForm = document.querySelector(".nav__form");
+  projectForm.classList.add("nav__form--active");
+  document.querySelector(".nav__form-input").focus();
+};
+
+const hideProjectForm = () => {
+  const projectForm = document.querySelector(".nav__form");
+  projectForm.classList.remove("nav__form--active");
 };
 
 const addProject = () => {
   // logic here
 };
 
-const hideProjectForm = () => {
-  const projectForm = document.querySelector(".nav_project-popup");
-  projectForm.classList.remove("active");
-};
 
 export default loadEventListeners;
 
