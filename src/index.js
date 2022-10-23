@@ -1,1 +1,3 @@
-console.log("js");
+import loadEventListeners from "./project";
+
+loadEventListeners();
