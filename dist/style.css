@@ -5,8 +5,8 @@
 
 :root {
     --white: #ffffff;
-    --light-grey: #f7f7f7;
-    --blue: #38bdf8;
+    --light-grey: #efeded;
+    --blue: #59c4f2;
     --nav-text: #4d4d4d;
     --nav-hover: #e3e2e2;
 }
@@ -39,6 +39,11 @@ header {
     width: auto;
 }
 
+/* ---- MAIN ---- */
+main {
+    display: flex;
+}
+
 /* ----- LEFT NAV PANEL ----- */
 nav {
     display: flex;
@@ -65,11 +70,14 @@ nav > hr {
     list-style: none;
 }
 
-li a {
+li {
+    display: flex;
+}
+
+.nav__text {
     display: flex;
     align-items: center;
     color: var(--nav-text);
-    text-decoration: none;
 }
 
 .nav__item {
@@ -146,4 +154,21 @@ li a {
 .nav__formll-btn:hover {
     background: #f78495;
 }
+
+/* ---- RIGHT MAIN SECTION ---- */
+
+.right-panel {
+    display: flex;
+    justify-content: center;
+    width: 90rem;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 2px solid black;
+}
+
+.right-panel__title {
+}
+
+
 
