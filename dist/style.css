@@ -46,12 +46,13 @@ main {
 
 /* ----- LEFT NAV PANEL ----- */
 nav {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     background: var(--light-grey);
     color: var(--nav-text);
     height: 100vh;
-    width: 330px;
+    min-width: 34rem;
+    max-width: 34rem;
 }
 
 nav > h2 {
@@ -70,10 +71,6 @@ nav > hr {
     list-style: none;
 }
 
-li {
-    display: flex;
-}
-
 .nav__text {
     display: flex;
     align-items: center;
@@ -81,9 +78,11 @@ li {
 }
 
 .nav__item {
+    display: flex;
+    align-items: center;
     font-size: 1.8rem;
     font-weight: bold;
-    padding: 0.8rem 2rem 0.8rem 2rem;
+    padding: 0.8rem 1rem 0.8rem 2rem;
     border-radius: 5px;
 }
 
@@ -94,6 +93,17 @@ li {
 .nav__icon {
     height: 33px;
     padding-right: 1rem;
+}
+
+.nav__remove-icon {
+    display: none;
+}
+
+.nav__item:hover .nav__remove-icon {
+    display: block;
+    margin: auto;
+    margin-right: 1rem;
+    padding-left: 2rem;
 }
 
 /* New Project Form Pop-Up */
@@ -130,7 +140,8 @@ li {
     margin-top: 1rem;
 }
 
-.nav__form-buttons > button {
+.nav__form-add-btn,
+.nav__form-cancell-btn {
     font-size: 1.5rem;
     width: 7.8rem;
     color: var(--white);
@@ -151,7 +162,7 @@ li {
     background: #fb7185;
 }
 
-.nav__formll-btn:hover {
+.nav__form-cancell-btn:hover {
     background: #f78495;
 }
 
@@ -167,8 +178,8 @@ li {
     border: 2px solid black;
 }
 
-.right-panel__title {
-}
+/* .right-panel__title {
+} */
 
 
 
