@@ -1,4 +1,5 @@
-const loadEventListeners = () => {
+// Adding a new project
+const newProjectEventListeners = () => {
     const addNewProject = document.querySelectorAll(".nav__add-new-project");
     addNewProject.forEach((el) => el.addEventListener("click", showProjectForm));
 
@@ -45,6 +46,7 @@ const addProject = (e) => {
     newProject.appendChild(projectRemoveIcon);
 
     hideProjectForm();
+    navItemsEventListeners();
 };
 
 const removeProject = (e) => {
@@ -64,4 +66,40 @@ const makeFirstLetterCap = (formInput) => {
 
 const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
 
-export default loadEventListeners;
+// Logic for switching in between Home tabs and Projects
+const navItemsEventListeners = () => {
+    const inboxNavTab = document.querySelectorAll(".nav__inbox");
+    inboxNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+
+    const todayNavTab = document.querySelectorAll(".nav__today");
+    todayNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+
+    const upcomingNavTab = document.querySelectorAll(".nav__upcoming");
+    upcomingNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+
+    const importantNavTab = document.querySelectorAll(".nav__important");
+    importantNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+
+    const addedProjects = document.querySelectorAll(".nav__item");
+    addedProjects.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+};
+
+const openNavTab = (e) => {
+    const allNavTabs = document.querySelectorAll(".nav__item");
+    allNavTabs.forEach((tab) => tab.classList.remove("nav__item--active"));
+    const navTab = e.target;
+    if (navTab.classList.contains("nav__add-new-project")) return;
+    navTab.closest("li").classList.add("nav__item--active");
+    console.log(navTab);
+    // const content = document.querySelector(".right-panel");
+
+    // const header = document.createElement("div");
+    // header.className = "right-panel__title";
+    // content.appendChild(header);
+
+    // const headerTitle = document.createElement("h1");
+    // headerTitle.textContent = tabName;
+    // header.appendChild(headerTitle);
+};
+
+export {newProjectEventListeners, navItemsEventListeners};

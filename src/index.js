@@ -1,3 +1,4 @@
-import loadEventListeners from "./project";
+import {newProjectEventListeners, navItemsEventListeners} from "./project";
 
-loadEventListeners();
+newProjectEventListeners();
+navItemsEventListeners();
