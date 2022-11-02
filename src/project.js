@@ -7,7 +7,7 @@ const newProjectEventListeners = () => {
     projectFormCancellBtn.addEventListener("click", hideProjectForm);
 
     const projectFormAddBtn = document.querySelector(".nav__form-add-btn");
-    projectFormAddBtn.addEventListener("click", (e) => addProject(e));
+    projectFormAddBtn.addEventListener("click", addProject);
 };
 
 const showProjectForm = () => {
@@ -42,7 +42,7 @@ const addProject = (e) => {
     const projectRemoveIcon = document.createElement("img");
     projectRemoveIcon.className = "nav__remove-icon";
     projectRemoveIcon.src = "../dist/img/nav_remove.png";
-    projectRemoveIcon.addEventListener("click", (e) => removeProject(e));
+    projectRemoveIcon.addEventListener("click", removeProject);
     newProject.appendChild(projectRemoveIcon);
 
     hideProjectForm();
@@ -69,19 +69,19 @@ const clearFormInput = () => document.querySelector(".nav__form-input").value = 
 // Logic for switching in between Home tabs and Projects
 const navItemsEventListeners = () => {
     const inboxNavTab = document.querySelectorAll(".nav__inbox");
-    inboxNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+    inboxNavTab.forEach((el) => el.addEventListener("click", openNavTab));
 
     const todayNavTab = document.querySelectorAll(".nav__today");
-    todayNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+    todayNavTab.forEach((el) => el.addEventListener("click", openNavTab));
 
     const upcomingNavTab = document.querySelectorAll(".nav__upcoming");
-    upcomingNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+    upcomingNavTab.forEach((el) => el.addEventListener("click", openNavTab));
 
     const importantNavTab = document.querySelectorAll(".nav__important");
-    importantNavTab.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+    importantNavTab.forEach((el) => el.addEventListener("click", openNavTab));
 
     const addedProjects = document.querySelectorAll(".nav__item");
-    addedProjects.forEach((el) => el.addEventListener("click", (e) => openNavTab(e)));
+    addedProjects.forEach((el) => el.addEventListener("click", openNavTab));
 };
 
 const openNavTab = (e) => {
