@@ -1,0 +1,26 @@
+const addTaskEventListeners = () => {
+    const addTask = document.querySelectorAll(".right-panel__add-task");
+    addTask.forEach((el) => el.addEventListener("click", showAddTaskForm));
+
+    const AddTaskFormCancellBtn = document.querySelector(".add-task__cancell-btn");
+    AddTaskFormCancellBtn.addEventListener("click", hideAddTaskForm);
+
+    // const addTaskFormAddBtn = document.querySelector(".nav__form-add-btn");
+    // addTaskFormAddBtn.addEventListener("click", processAddTaskFormInput);
+};
+
+const showAddTaskForm = () => {
+    const addTaskForm = document.querySelector(".right-panel__task-form");
+    addTaskForm.classList.add("right-panel__task-form--active");
+    document.querySelector(".task-form__title").focus();
+};
+
+const hideAddTaskForm = () => {
+    const addTaskForm = document.querySelector(".right-panel__task-form");
+    addTaskForm.classList.remove("right-panel__task-form--active");
+    clearFormInput();
+};
+
+const clearFormInput = () => document.querySelector(".task-form__title").value = "";
+
+export {addTaskEventListeners};

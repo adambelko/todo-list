@@ -93,18 +93,23 @@ const highlightNavTab = (e) => {
     openNavTab(navTab);
 };
 
+const openNavTab = (navTab) => {
+    renderHeader(navTab);
+};
+
 const resetHeaderTitle = (content) => {
     const title = document.querySelector(".right-panel__title");
     content.removeChild(title);
 };
 
-const openNavTab = (navTab) => {
+const renderHeader = (navTab) => {
     const content = document.querySelector(".right-panel");
-    resetHeaderTitle(content);
     const headerTitle = document.createElement("h1");
     headerTitle.className = "right-panel__title";
     headerTitle.textContent = navTab.closest("li").innerText;
-    content.appendChild(headerTitle);
+    resetHeaderTitle(content);
+    content.prepend(headerTitle);
 };
+
 
 export {newProjectEventListeners, navItemsEventListeners};

@@ -1,4 +1,6 @@
-import {newProjectEventListeners, navItemsEventListeners} from "./project";
+import {newProjectEventListeners, navItemsEventListeners} from "./createProject";
+import {addTaskEventListeners} from "./createTask";
 
 newProjectEventListeners();
 navItemsEventListeners();
+addTaskEventListeners();
