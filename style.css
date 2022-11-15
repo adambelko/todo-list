@@ -7,8 +7,12 @@
     --white: #ffffff;
     --light-grey: #efeded;
     --blue: #59c4f2;
-    --nav-text: #4d4d4d;
-    --nav-hover: #e3e2e2;
+    --text: #4d4d4d;
+    --hover: #e3e2e2;
+    --green-btn: #34d399;
+    --green-btn-hover: #3be0a4;
+    --red-btn: #fb7185;
+    --red-btn-hover: #f78495;
 }
 
 html {
@@ -49,7 +53,7 @@ nav {
     /* display: flex; */
     flex-direction: column;
     background: var(--light-grey);
-    color: var(--nav-text);
+    color: var(--text);
     height: 100vh;
     min-width: 34rem;
     max-width: 34rem;
@@ -74,29 +78,35 @@ nav > hr {
 .nav__text {
     display: flex;
     align-items: center;
-    color: var(--nav-text);
+    color: var(--text);
 }
 
 .nav__item {
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
     font-size: 1.8rem;
     font-weight: bold;
-    padding: 0.8rem 1rem 0.8rem 2rem;
+    padding: 0.7rem 1rem 0.7rem 2rem;
     border-radius: 5px;
 }
 
 .nav__item--active {
-    background: var(--nav-hover);
+    background: var(--hover);
 }
 
 .nav__item:hover {
-    background: var(--nav-hover);
+    background: var(--hover);
 }
 
 .nav__icon {
     height: 33px;
     padding-right: 1rem;
+}
+
+.nav__add-new-project-img {
+    width: 28px;
+    height: auto;
 }
 
 .nav__remove-icon {
@@ -115,7 +125,7 @@ nav > hr {
     display: none;
     height: 9rem;
     margin: 2rem 2rem 0rem 2rem;
-    background-color: var(--nav-hover);
+    background-color: var(--hover);
     border-radius: 5px;
 }
 
@@ -155,36 +165,130 @@ nav > hr {
 }
 
 .nav__form-add-btn {
-    background: #34d399;
+    background: var(--green-btn);
 }
 
 .nav__form-add-btn:hover {
-    background: #3be0a4;
+    background: var(--green-btn-hover);
 }
 
 .nav__form-cancell-btn {
-    background: #fb7185;
+    background: var(--red-btn);
 }
 
 .nav__form-cancell-btn:hover {
-    background: #f78495;
+    background: var(--red-btn-hover);
 }
 
 /* ---- RIGHT MAIN SECTION ---- */
 
 .right-panel {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     width: 100%;
+    color: var(--text);
 }
 
 .right-panel__title {
     display: flex;
     justify-content: center;
+    height: fit-content;
     width: 80%;
-    margin-top: 2rem;
-    font-size: 1.6rem;
+    margin: 0 auto;
+    margin-top: 2.4rem;
+    font-size: 3rem;
 }
 
+.right-panel__add-task {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    width: 80%;
+    font-size: 1.8rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
 
+.right-panel__add-task:hover {
+    background: var(--hover);
+}
 
+.right-panel__add-task-img {
+    height: 28px;
+    width: auto;
+    margin-right: 1rem;
+}
+
+/* ----- Hidden Add Task Form ----- */
+.right-panel__task-form {
+    display: none;
+    flex-direction: column;
+    margin: auto;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    width: 80%;
+}
+
+.right-panel__task-form--active {
+    display: block;
+}
+
+.task-form__title,
+.task-form__description {
+    font-size: 1.8rem;
+    padding-left: 0.5rem;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.task-form__description {
+    font-family: 'Pragati Narrow', sans-serif;
+    resize: none;
+    padding: 0.3rem;
+    padding-left: 0.5rem;
+}
+
+.right-panel__task-form > label {
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.task-form__title {
+    height: 2.7rem;
+}
+
+.right-panel__add-task-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.add-task__add-btn,
+.add-task__cancell-btn {
+    font-size: 1.5rem;
+    width: 7.8rem;
+    color: var(--white);
+    font-weight: 600;
+    padding: 0.6rem;
+    border-radius: 5px;
+}
+
+.add-task__add-btn {
+    background: var(--green-btn);
+}
+
+.add-task__add-btn:hover {
+    background: var(--green-btn-hover);
+}
+
+.add-task__cancell-btn {
+    background: var(--red-btn);
+}
+
+.add-task__cancell-btn:hover {
+    background: var(--red-btn-hover);
+}
