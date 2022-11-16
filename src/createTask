@@ -5,8 +5,8 @@ const addTaskEventListeners = () => {
     const AddTaskFormCancellBtn = document.querySelector(".add-task__cancell-btn");
     AddTaskFormCancellBtn.addEventListener("click", hideAddTaskForm);
 
-    // const addTaskFormAddBtn = document.querySelector(".nav__form-add-btn");
-    // addTaskFormAddBtn.addEventListener("click", processAddTaskFormInput);
+    const addTaskFormAddBtn = document.querySelector(".add-task__add-btn");
+    addTaskFormAddBtn.addEventListener("click", processAddTaskFormInput);
 };
 
 const showAddTaskForm = () => {
@@ -21,6 +21,70 @@ const hideAddTaskForm = () => {
     clearFormInput();
 };
 
-const clearFormInput = () => document.querySelector(".task-form__title").value = "";
+const clearFormInput = () => {
+    document.querySelector(".task-form__title").value = "";
+    document.querySelector(".task-form__description").value = "";
+};
+
+const processAddTaskFormInput = (e) => {
+    console.log("log")
+
+    addTask(e);
+};
+
+const addTask = (e) => {
+    e.preventDefault();
+    const taskList = document.querySelector(".right-panel__task-list");
+    const taskItem = document.createElement("li");
+    taskItem.className = "right-panel__task-item";
+    taskList.appendChild(taskItem);
+    
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    taskItem.appendChild(checkbox);
+
+    const textWrapper = document.createElement("div");
+    textWrapper.className = "right-panel__task-text-wrapper";
+    taskItem.appendChild(textWrapper);
+
+    const taskTitle = document.createElement("div");
+    taskTitle.className = "right-panel__task-title";
+    textWrapper.appendChild(taskTitle);
+    taskTitle.appendChild(getTaskInputValues());
+
+    const taskDescript = document.createElement("div");
+    taskDescript.className = "right-panel__task-description";
+    textWrapper.appendChild(taskDescript);
+    taskDescript.appendChild(getTaskInputValues());
+
+
+    const iconWrapper = document.createElement("div");
+    iconWrapper.className = "right-panel__task-icons";
+    taskItem.appendChild(iconWrapper);
+
+    const iconImportant = document.createElement("img");
+    iconImportant.src = "../dist/img/nav_priority.png";
+    iconWrapper.appendChild(iconImportant);
+
+    const iconEdit = document.createElement("img");
+    iconEdit.src = "../dist/img/edit.png";
+    iconWrapper.appendChild(iconEdit);
+
+    const iconRemove = document.createElement("img");
+    iconRemove.src = "../dist/img/nav_remove.png";
+    iconWrapper.appendChild(iconRemove);
+
+    hideAddTaskForm();
+    addTaskEventListeners();
+};
+
+const getTaskInputValues = () => {
+    const formInput = document.querySelector(".task-form__title");
+    return document.createTextNode(makeFirstLetterCap(formInput.value));
+};
+
+const makeFirstLetterCap = (formInput) => {
+    return formInput.charAt(0).toUpperCase() + formInput.slice(1);
+};
 
 export {addTaskEventListeners};

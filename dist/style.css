@@ -206,7 +206,8 @@ nav > hr {
     width: 80%;
     font-size: 1.8rem;
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 1rem;
     font-weight: bold;
     border-radius: 5px;
@@ -228,12 +229,19 @@ nav > hr {
     flex-direction: column;
     margin: auto;
     font-size: 1.8rem;
-    margin-top: 1rem;
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
     width: 80%;
+    height: fit-content;
 }
 
 .right-panel__task-form--active {
     display: block;
+}
+
+.right-panel__task-form-input-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .task-form__title,
@@ -250,10 +258,9 @@ nav > hr {
     padding: 0.3rem;
     padding-left: 0.5rem;
 }
-
-.right-panel__task-form > label {
-    margin-top: 1rem;
-    margin-bottom: 0.4rem;
+.right-panel__task-form-input-wrapper > label {
+    margin-top: 0.7rem;
+    margin-bottom: 0.2rem;
 }
 
 .task-form__title {
@@ -291,4 +298,44 @@ nav > hr {
 
 .add-task__cancell-btn:hover {
     background: var(--red-btn-hover);
+}
+
+/* ----- Task List ----- */
+.right-panel__all-todos {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel__task-item {
+    display: flex;
+    list-style: none;
+    font-size: 1.8rem;
+    background: var(--hover);
+    margin: auto;
+    margin-bottom: 0.5rem;
+    width: 80%;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.right-panel__task-left{
+    display: flex;
+    align-items: center;
+}
+
+.right-panel__task-title,
+.right-panel__task-description {
+    margin-left: 1.5rem;
+}
+
+.right-panel__task-description {
+    font-size: 1.5rem;
+}
+
+.right-panel__task-icons {
+    display: flex;
+    margin-right: 1rem;
+    margin-left: auto;
+    height: 2.2rem;
+    gap: 0.2rem;
 }
