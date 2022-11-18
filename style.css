@@ -249,15 +249,31 @@ nav > hr {
     flex-direction: column;
 }
 
-.task-form__title,
-.task-form__description {
+.task-form__top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.task-form__top-wrapper > input {
+    width: 100%;
+    margin-left: 0.5rem;
+}
+
+.task-form__date-label {
+    margin-left: 2rem;
+}
+
+#task-form__title,
+#task-form__description,
+#task-form__date {
     font-size: 1.8rem;
     padding-left: 0.5rem;
     border: 2px solid black;
     border-radius: 5px;
 }
 
-.task-form__description {
+#task-form__description {
     font-family: 'Pragati Narrow', sans-serif;
     resize: none;
     padding: 0.3rem;
