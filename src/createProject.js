@@ -7,7 +7,7 @@ const newProjectEventListeners = () => {
     projectFormCancellBtn.addEventListener("click", hideProjectForm);
 
     const projectFormAddBtn = document.querySelector(".nav__form-add-btn");
-    projectFormAddBtn.addEventListener("click", (e) => processProjectFormInput(e));
+    projectFormAddBtn.addEventListener("click", processProjectFormInput);
 };
 
 const showProjectForm = () => {
@@ -22,22 +22,40 @@ const hideProjectForm = () => {
     clearFormInput();
 };
 
-const CreateProject = (name) => {
-    return {name};
+const emptyProjectList = [];
+const projectListArr = JSON.parse(localStorage.getItem("projectList") || JSON.stringify(emptyProjectList));
+
+const CreateProject = (projectID, projectName) => {
+    const taskList = [];
+    const taskID = taskList.length;
+
+    return {projectID, projectName, taskList, taskID};
 };
 
 const processProjectFormInput = (e) => {
-    const projectList = [];
-    const newProject = CreateProject(getProjectName());
-    projectList.push(newProject.name);
-    addProject(e);
+    e.preventDefault();
+
+    const projectID = getProjectID();
+    const newProject = CreateProject(projectID, getProjectName());
+    projectListArr.push(newProject);
+    console.log(projectListArr)
+    saveToMemory();
+    addProject(getProjectName());
+    
 };
 
-const addProject = (e) => {
-    e.preventDefault();
+
+const getProjectID = () => document.querySelectorAll(".nav__project-name").length;
+
+const saveToMemory = () => {
+    const convertedProject = JSON.stringify(projectListArr)
+    localStorage.setItem("projectList", convertedProject);
+};
+
+const addProject = (name) => {
     const navProjects = document.querySelector(".nav__section-projects");
     const newProject = document.createElement("li");
-    newProject.className = "nav__item";
+    newProject.className = "nav__item nav__project-name";
     navProjects.appendChild(newProject);
 
     const projectIcon = document.createElement("img");
@@ -45,10 +63,10 @@ const addProject = (e) => {
     projectIcon.src = "../dist/img/nav_project.png";
     newProject.appendChild(projectIcon);
 
-    const projectTextDiv = document.createElement("div");
-    projectTextDiv.className = "nav__text";
-    newProject.appendChild(projectTextDiv);
-    projectTextDiv.appendChild(getProjectName());
+    const projectName = document.createElement("div");
+    projectName.className = "nav__text";
+    projectName.textContent = name;
+    newProject.appendChild(projectName);
 
     const projectRemoveIcon = document.createElement("img");
     projectRemoveIcon.className = "nav__remove-icon";
@@ -67,12 +85,12 @@ const removeProject = (e) => {
 };
 
 const getProjectName = () => {
-    const formInput = document.querySelector(".nav__form-input");
-    return document.createTextNode(makeFirstLetterCap(formInput.value));
+    const formInput = document.querySelector(".nav__form-input").value;
+    return makeFirstLetterCap(formInput);
 };
 
-const makeFirstLetterCap = (formInput) => {
-    return formInput.charAt(0).toUpperCase() + formInput.slice(1);
+const makeFirstLetterCap = (input) => {
+    return input.charAt(0).toUpperCase() + input.slice(1);
 };
 
 const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
