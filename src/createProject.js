@@ -30,7 +30,7 @@ const hideProjectForm = () => {
     clearFormInput();
 };
 
-//  Factory for creating new objects 
+// Factory for creating a new objects 
 const CreateProject = (projectID, projectName) => {
     const taskList = [];
     const taskID = taskList.length;
@@ -46,11 +46,11 @@ let projectList = JSON.parse
 const processProjectFormInput = (e) => {
     e.preventDefault();
     const projectID = getProjectID();
-    const newProject = CreateProject(projectID, getProjectName());
+    const projectName = getProjectName();
+    const newProject = CreateProject(projectID, projectName);
     projectList.push(newProject);
-    console.log(projectList)
     saveToMemory();
-    addProject(getProjectName());
+    addProject(projectName);
 };
 
 const getProjectName = () => {
@@ -68,6 +68,7 @@ const saveToMemory = () => {
 };
 
 const displayProjectList = (array) => {
+    console.log(projectList)
     array.forEach(obj => addProject(obj.projectName));
 };
 
@@ -75,6 +76,7 @@ const addProject = (name) => {
     const navProjects = document.querySelector(".nav__section-projects");
     const newProject = document.createElement("li");
     newProject.className = "nav__item nav__project-name";
+    newProject.dataset.index = getProjectID();
     navProjects.appendChild(newProject);
 
     const projectIcon = document.createElement("img");
@@ -98,11 +100,14 @@ const addProject = (name) => {
 };
 
 const removeProject = (e) => {
+    const projectIndex = e.target.parentNode.dataset.index;
+    projectList.splice(projectIndex, 1);
+    saveToMemory();
+    
     const navProjects = document.querySelector(".nav__section-projects");
     const selectedProject = e.target.parentNode;
     navProjects.removeChild(selectedProject);
 };
-
 
 
 // Logic for switching in between Home tabs and Projects
