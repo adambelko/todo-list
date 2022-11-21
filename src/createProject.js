@@ -1,4 +1,4 @@
-// Adding a new project
+// Event listeners for elements in Add New Project Form
 const newProjectEventListeners = () => {
     const addNewProject = document.querySelectorAll(".nav__add-new-project");
     addNewProject.forEach((el) => el.addEventListener("click", showProjectForm));
@@ -8,6 +8,14 @@ const newProjectEventListeners = () => {
 
     const projectFormAddBtn = document.querySelector(".nav__form-add-btn");
     projectFormAddBtn.addEventListener("click", processProjectFormInput);
+
+    displayProjectList(projectList);
+};
+
+// Event Listemers for Nav tabs and Projects
+const navItemsEventListeners = () => {
+    const addedProjects = document.querySelectorAll(".nav__item");
+    addedProjects.forEach((el) => el.addEventListener("click", highlightNavTab));
 };
 
 const showProjectForm = () => {
@@ -22,34 +30,45 @@ const hideProjectForm = () => {
     clearFormInput();
 };
 
-const emptyProjectList = [];
-const projectListArr = JSON.parse(localStorage.getItem("projectList") || JSON.stringify(emptyProjectList));
-
+//  Factory for creating new objects 
 const CreateProject = (projectID, projectName) => {
     const taskList = [];
     const taskID = taskList.length;
-
+    
     return {projectID, projectName, taskList, taskID};
 };
 
+// Global variables 
+const emptyProjectList = [];
+let projectList = JSON.parse
+    (localStorage.getItem("myProjects") || JSON.stringify(emptyProjectList));
+
 const processProjectFormInput = (e) => {
     e.preventDefault();
-
     const projectID = getProjectID();
     const newProject = CreateProject(projectID, getProjectName());
-    projectListArr.push(newProject);
-    console.log(projectListArr)
+    projectList.push(newProject);
+    console.log(projectList)
     saveToMemory();
     addProject(getProjectName());
-    
 };
 
+const getProjectName = () => {
+    const formInput = document.querySelector(".nav__form-input").value;
+    return makeFirstLetterCap(formInput);
+};
 
+const makeFirstLetterCap = (input) => input.charAt(0).toUpperCase() + input.slice(1);
 const getProjectID = () => document.querySelectorAll(".nav__project-name").length;
+const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
 
 const saveToMemory = () => {
-    const convertedProject = JSON.stringify(projectListArr)
-    localStorage.setItem("projectList", convertedProject);
+    const convertedProject = JSON.stringify(projectList);
+    localStorage.setItem("myProjects", convertedProject);
+};
+
+const displayProjectList = (array) => {
+    array.forEach(obj => addProject(obj.projectName));
 };
 
 const addProject = (name) => {
@@ -84,22 +103,7 @@ const removeProject = (e) => {
     navProjects.removeChild(selectedProject);
 };
 
-const getProjectName = () => {
-    const formInput = document.querySelector(".nav__form-input").value;
-    return makeFirstLetterCap(formInput);
-};
 
-const makeFirstLetterCap = (input) => {
-    return input.charAt(0).toUpperCase() + input.slice(1);
-};
-
-const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
-
-// Event Listemers for Nav tabs and Projects
-const navItemsEventListeners = () => {
-    const addedProjects = document.querySelectorAll(".nav__item");
-    addedProjects.forEach((el) => el.addEventListener("click", highlightNavTab));
-};
 
 // Logic for switching in between Home tabs and Projects
 const highlightNavTab = (e) => {
