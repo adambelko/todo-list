@@ -33,9 +33,8 @@ const hideProjectForm = () => {
 // Factory for creating a new objects 
 const CreateProject = (projectID, projectName) => {
     const taskList = [];
-    const taskID = taskList.length;
     
-    return {projectID, projectName, taskList, taskID};
+    return {projectID, projectName, taskList};
 };
 
 // Global variables 
@@ -47,6 +46,7 @@ const processProjectFormInput = (e) => {
     e.preventDefault();
     const projectID = getProjectID();
     const projectName = getProjectName();
+
     const newProject = CreateProject(projectID, projectName);
     projectList.push(newProject);
     saveToMemory();
@@ -68,7 +68,6 @@ const saveToMemory = () => {
 };
 
 const displayProjectList = (array) => {
-    console.log(projectList)
     array.forEach(obj => addProject(obj.projectName));
 };
 
@@ -103,7 +102,7 @@ const removeProject = (e) => {
     const projectIndex = e.target.parentNode.dataset.index;
     projectList.splice(projectIndex, 1);
     saveToMemory();
-    
+
     const navProjects = document.querySelector(".nav__section-projects");
     const selectedProject = e.target.parentNode;
     navProjects.removeChild(selectedProject);
@@ -139,4 +138,4 @@ const renderHeader = (navTab) => {
 };
 
 
-export {newProjectEventListeners, navItemsEventListeners};
+export {newProjectEventListeners, navItemsEventListeners, projectList, saveToMemory};
