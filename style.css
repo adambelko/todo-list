@@ -252,6 +252,7 @@ nav > hr {
 .task-form__top-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.5rem;
 }
 
@@ -261,19 +262,20 @@ nav > hr {
 }
 
 .task-form__date-label {
+    white-space: nowrap;
     margin-left: 2rem;
 }
 
-#task-form__title,
-#task-form__description,
-#task-form__date {
+.task-form__title,
+.task-form__description,
+.task-form__date {
     font-size: 1.8rem;
     padding-left: 0.5rem;
     border: 2px solid black;
     border-radius: 5px;
 }
 
-#task-form__description {
+.task-form__description {
     font-family: 'Pragati Narrow', sans-serif;
     resize: none;
     padding: 0.3rem;
@@ -284,7 +286,8 @@ nav > hr {
     margin-bottom: 0.2rem;
 }
 
-.task-form__title {
+.task-form__title,
+.task-form__date {
     height: 2.7rem;
 }
 
@@ -322,7 +325,7 @@ nav > hr {
 }
 
 /* ----- Task List ----- */
-.right-panel__all-todos {
+.right-panel__all-tasks {
     display: flex;
     flex-direction: column;
 }
@@ -363,6 +366,15 @@ nav > hr {
 
 .right-panel__task-icons > img {
     padding: 0.2rem;
+    border-radius: 5px;
+}
+
+.right-panel__task-due-date {
+    display: flex;
+    align-items: center;
+    background: var(--light-grey);
+    margin-right: 0.7rem;
+    padding: 0.5rem;
     border-radius: 5px;
 }
 
