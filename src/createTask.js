@@ -30,25 +30,23 @@ const clearFormInput = () => {
 };
 
 //Factory for new tasks
-const CreateTask = (ID, title, description, dueDate) => {
+const CreateTask = (id, title, description, dueDate) => {
 
-    return {ID, title, description, dueDate};
+    return {id, title, description, dueDate};
 };
 
-// here comes logic for reading tasks from memory
-
 const processAddTaskFormInput = (e) => {
+    e.preventDefault();
     const projectID = getProjectID();
-    const ID = getTaskID();
+    const id = getTaskID();
     const title = getTaskInputValue("title");
     const description = getTaskInputValue("description");
     const dueDate = getTaskDueDate();
     
-    const newTask = CreateTask(ID, title, description, dueDate);
+    const newTask = CreateTask(id, title, description, dueDate);
     projectList[projectID].taskList.push(newTask);
-    console.log(projectList);
     saveToMemory();
-    addTask(e);
+    addTask(title, description, dueDate);
 };
 
 const getProjectID = () => document.querySelector(".nav__item--active").dataset.index;
@@ -59,8 +57,14 @@ const getTaskDueDate = () => {
     return (dueDate === "") ? "No Due Date" : dueDate;  
 };
 
-const addTask = (e) => {
-    e.preventDefault();
+const displayTaskList = (index) => {
+    projectList[index].taskList.forEach(task => {
+        addTask(task.title, task.description, task.dueDate);
+    });
+};
+
+
+const addTask = (title, description, dueDate) => {
     const taskList = document.querySelector(".right-panel__task-list");
     const taskItem = document.createElement("li");
     taskItem.className = "right-panel__task-item";
@@ -76,13 +80,13 @@ const addTask = (e) => {
 
     const taskTitle = document.createElement("div");
     taskTitle.className = "right-panel__task-title";
+    taskTitle.textContent = title;
     textWrapper.appendChild(taskTitle);
-    taskTitle.appendChild(getTaskInputValue("title"));
 
     const taskDescript = document.createElement("div");
     taskDescript.className = "right-panel__task-description";
+    taskDescript.textContent = description;
     textWrapper.appendChild(taskDescript);
-    taskDescript.appendChild(getTaskInputValue("description"));
 
     const iconWrapper = document.createElement("div");
     iconWrapper.className = "right-panel__task-icons";
@@ -90,7 +94,7 @@ const addTask = (e) => {
 
     const taskDueDate = document.createElement("div");
     taskDueDate.className = "right-panel__task-due-date";
-    taskDueDate.textContent = getTaskDueDate();
+    taskDueDate.textContent = dueDate;
     iconWrapper.appendChild(taskDueDate);
 
     const iconImportant = document.createElement("img");
@@ -117,11 +121,11 @@ const addTask = (e) => {
 
 const getTaskInputValue = (name) => {
     const formInput = document.querySelector(`.task-form__${name}`);
-    return document.createTextNode(makeFirstLetterCap(formInput.value));
+    return makeFirstLetterCap(formInput.value);
 };
 
 const makeFirstLetterCap = (formInput) => {
     return formInput.charAt(0).toUpperCase() + formInput.slice(1);
 };
 
-export {addTaskEventListeners, showAddTaskForm};
+export { addTaskEventListeners, addTask };
