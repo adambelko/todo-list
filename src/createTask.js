@@ -30,27 +30,30 @@ const clearFormInput = () => {
 };
 
 //Factory for new tasks
-const CreateTask = (id, title, description, dueDate) => {
+const CreateTask = (uuid, title, description, dueDate) => {
 
-    return {id, title, description, dueDate};
+    return {uuid, title, description, dueDate};
 };
 
 const processAddTaskFormInput = (e) => {
     e.preventDefault();
-    const projectID = getProjectID();
-    const id = getTaskID();
+    const projectIndex = getProjectIndex();
+    const id = self.crypto.randomUUID();
     const title = getTaskInputValue("title");
     const description = getTaskInputValue("description");
     const dueDate = getTaskDueDate();
     
     const newTask = CreateTask(id, title, description, dueDate);
-    projectList[projectID].taskList.push(newTask);
+    projectList[projectIndex].taskList.push(newTask);
     saveToMemory();
-    addTask(title, description, dueDate);
+    addTask(id, title, description, dueDate);
 };
 
-const getProjectID = () => document.querySelector(".nav__item--active").dataset.index;
-const getTaskID = () => document.querySelectorAll(".right-panel__task-item").length;
+const getProjectIndex = () => {
+    const uuid = document.querySelector(".nav__item--active").dataset.uuid;
+    const projectIndex = projectList.findIndex((object) => object.uuid === uuid);
+    return projectIndex;
+};
 
 const getTaskDueDate = () => {
     const dueDate = document.querySelector(".task-form__date").value;
@@ -64,10 +67,11 @@ const displayTaskList = (index) => {
 };
 
 
-const addTask = (title, description, dueDate) => {
+const addTask = (id, title, description, dueDate) => {
     const taskList = document.querySelector(".right-panel__task-list");
     const taskItem = document.createElement("li");
     taskItem.className = "right-panel__task-item";
+    taskItem.dataset.uuid = id;
     taskList.appendChild(taskItem);
     
     const checkbox = document.createElement("input");
