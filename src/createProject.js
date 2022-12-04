@@ -33,26 +33,25 @@ const hideProjectForm = () => {
 };
 
 // Factory for creating a new objects 
-const CreateProject = (projectID, projectName) => {
+const CreateProject = (uuid, projectName) => {
     const taskList = [];
     
-    return {projectID, projectName, taskList};
+    return {uuid, projectName, taskList};
 };
 
 // Global variables 
 const emptyProjectList = [];
 let projectList = JSON.parse
-    (localStorage.getItem("myProjects") || JSON.stringify(emptyProjectList));
+(localStorage.getItem("myProjects") || JSON.stringify(emptyProjectList));
 
 const processProjectFormInput = (e) => {
     e.preventDefault();
-    const projectID = getProjectID();
+    let projectID = self.crypto.randomUUID();
     const projectName = getProjectName();
-
     const newProject = CreateProject(projectID, projectName);
     projectList.push(newProject);
     saveToMemory();
-    addProject(projectName);
+    addProject(projectName, projectID);
 };
 
 const getProjectName = () => {
@@ -61,7 +60,6 @@ const getProjectName = () => {
 };
 
 const makeFirstLetterCap = (input) => input.charAt(0).toUpperCase() + input.slice(1);
-const getProjectID = () => document.querySelectorAll(".nav__project-name").length;
 const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
 
 const saveToMemory = () => {
@@ -70,14 +68,14 @@ const saveToMemory = () => {
 };
 
 const displayProjectList = (array) => {
-    array.forEach(obj => addProject(obj.projectName));
+    array.forEach((obj) => addProject(obj.projectName, obj.uuid));
 };
 
-const addProject = (name) => {
+const addProject = (name, id) => {
     const navProjects = document.querySelector(".nav__section-projects");
     const newProject = document.createElement("li");
     newProject.className = "nav__item nav__project-name";
-    newProject.dataset.index = getProjectID();
+    newProject.dataset.uuid = id;
     navProjects.appendChild(newProject);
 
     const projectIcon = document.createElement("img");
@@ -101,7 +99,8 @@ const addProject = (name) => {
 };
 
 const removeProject = (e) => {
-    const projectIndex = e.target.parentNode.dataset.index;
+    const uuid = e.target.parentNode.dataset.uuid;
+    const projectIndex = projectList.findIndex((object) => object.uuid === uuid);
     projectList.splice(projectIndex, 1);
     saveToMemory();
 
@@ -110,9 +109,13 @@ const removeProject = (e) => {
     navProjects.removeChild(selectedProject);
 };
 
-// Logic for switching in between Home tabs and Projects
+// UI 
 const displayContent = (e) => {
     highlightNavTab(e);
+
+    if (e.target.classList.contains("nav__add-new-project")) return;
+    if (e.target.classList.contains("nav__remove-icon")) return;
+
     displayHeader(e);
     resetTaskList();
     displayTaskList(e);
@@ -125,7 +128,6 @@ const highlightNavTab = (e) => {
     const navTab = e.target;
     if (navTab.classList.contains("nav__add-new-project")) return;
     navTab.closest("li").classList.add("nav__item--active");
-    return navTab;
 };
 
 const displayHeader = (e) => {
@@ -152,12 +154,12 @@ const resetTaskList = () => {
 const displayTaskList = (e) => {
     let index = e.target.dataset.index;
     if (index === undefined) index = e.target.parentNode.dataset.index;
-    
+
     // logic for HOME tabs 
 
-    projectList[index].taskList.forEach(task => {
+    projectList[index].taskList.forEach((task) => {
         addTask(task.title, task.description, task.dueDate);
     });
 };
 
-export {newProjectEventListeners, navItemsEventListeners, projectList, saveToMemory};
+export { newProjectEventListeners, navItemsEventListeners, projectList, saveToMemory };
