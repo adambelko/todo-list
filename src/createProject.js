@@ -1,4 +1,4 @@
-import { addTask } from "./createTask";
+import { navItemsEventListeners, displayDefaultPage } from "./displayTasks";
 
 // Event listeners for elements in Add New Project Form
 const newProjectEventListeners = () => {
@@ -12,12 +12,6 @@ const newProjectEventListeners = () => {
     projectFormAddBtn.addEventListener("click", processProjectFormInput);
 
     displayProjectList(projectList);
-};
-
-// Event Listemers for Nav tabs and Projects
-const navItemsEventListeners = () => {
-    const addedProjects = document.querySelectorAll(".nav__item");
-    addedProjects.forEach((el) => el.addEventListener("click", displayContent));
 };
 
 const showProjectForm = () => {
@@ -107,59 +101,8 @@ const removeProject = (e) => {
     const navProjects = document.querySelector(".nav__section-projects");
     const selectedProject = e.target.parentNode;
     navProjects.removeChild(selectedProject);
+    
+    displayDefaultPage();
 };
 
-// UI 
-const displayContent = (e) => {
-    highlightNavTab(e);
-
-    if (e.target.classList.contains("nav__add-new-project")) return;
-    if (e.target.classList.contains("nav__remove-icon")) return;
-
-    displayHeader(e);
-    resetTaskList();
-    displayTaskList(e);
-};
-
-const highlightNavTab = (e) => {
-    const allNavTabs = document.querySelectorAll(".nav__item");
-    allNavTabs.forEach((tab) => tab.classList.remove("nav__item--active"));
-
-    const navTab = e.target;
-    if (navTab.classList.contains("nav__add-new-project")) return;
-    navTab.closest("li").classList.add("nav__item--active");
-};
-
-const displayHeader = (e) => {
-    const content = document.querySelector(".right-panel");
-    const headerTitle = document.createElement("h1");
-    headerTitle.className = "right-panel__title";
-    headerTitle.textContent = e.target.closest("li").innerText;
-    resetHeaderTitle(content);
-    content.prepend(headerTitle);
-};
-
-const resetHeaderTitle = (content) => {
-    const title = document.querySelector(".right-panel__title");
-    content.removeChild(title);
-};
-
-const resetTaskList = () => {
-    const taskList = document.querySelector(".right-panel__task-list");
-    const taskItems = document.querySelectorAll(".right-panel__task-item");
-
-    taskItems.forEach(task => taskList.removeChild(task));
-};
-
-const displayTaskList = (e) => {
-    let index = e.target.dataset.index;
-    if (index === undefined) index = e.target.parentNode.dataset.index;
-
-    // logic for HOME tabs 
-
-    projectList[index].taskList.forEach((task) => {
-        addTask(task.title, task.description, task.dueDate);
-    });
-};
-
-export { newProjectEventListeners, navItemsEventListeners, projectList, saveToMemory };
+export { newProjectEventListeners, projectList, saveToMemory };
