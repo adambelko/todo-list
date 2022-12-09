@@ -1,20 +1,13 @@
 import { projectList, saveToMemory } from "./createProject";
 
 const prioritiseTask = (e, taskUUID) => {
-    let taskIndex;
-    let projectIndex;
+    const indexes = getIndexData(taskUUID);
+    const taskIndex = indexes.taskIndex;
+    const projectIndex = indexes.projectIndex;
+    
+    let important = projectList[projectIndex].taskList[taskIndex].important;
 
-    for (let i = 0; i < projectList.length; i++) {
-        let findIndex = projectList[i].taskList.findIndex((task) => task.uuid === taskUUID);
-        if (findIndex >= 0) {
-            taskIndex = findIndex;    
-            projectIndex = i;
-            break;
-        }
-    }
-    let importance = projectList[projectIndex].taskList[taskIndex].important;
-
-    if (importance === false) {
+    if (important === false) {
         e.target.classList.add("task-item__important-icon--active");
         projectList[projectIndex].taskList[taskIndex].important = true;
         
@@ -31,12 +24,9 @@ const editTask = () => {
 };
 
 const removeTask = (e, taskUUID) => {
-    const projectUUID = document.querySelector(".nav__item--active").dataset.uuid;
-    const projectIndex = projectList.findIndex(
-        (project) => project.uuid === projectUUID);
-
-    const taskIndex = projectList[projectIndex].taskList.findIndex(
-        (task) => task.uuid === taskUUID);
+    const indexes = getIndexData(taskUUID);
+    const taskIndex = indexes.taskIndex;
+    const projectIndex = indexes.projectIndex;
 
     projectList[projectIndex].taskList.splice(taskIndex, 1);
     saveToMemory();
@@ -46,5 +36,20 @@ const removeTask = (e, taskUUID) => {
     taskList.removeChild(thisTask);
 };
 
+const getIndexData = (taskUUID) => {
+    let taskIndex;
+    let projectIndex;
+
+    for (let i = 0; i < projectList.length; i++) {
+        let findIndex = projectList[i].taskList.findIndex((task) => task.uuid === taskUUID);
+        if (findIndex >= 0) {
+            taskIndex = findIndex;
+            projectIndex = i;
+            break;
+        }
+    }
+
+    return {taskIndex, projectIndex};
+};
 
 export { prioritiseTask, editTask, removeTask };
