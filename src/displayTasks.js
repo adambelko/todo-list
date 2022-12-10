@@ -1,7 +1,7 @@
 import { projectList } from "./createProject";
 import { addTask } from "./createTask";
 
-// Event Listemers for Nav tabs and Projects
+// Event Listeners for Nav tabs and Projects
 const navItemsEventListeners = () => {
     const navTabItems = document.querySelectorAll(".nav__item");
     navTabItems.forEach((item) => item.addEventListener("click", (e) => {
@@ -14,14 +14,21 @@ const navItemsEventListeners = () => {
         project.addEventListener("click", displayProjectTasks);
     });
 
-    const inbox = document.querySelector(".nav__inbox");
-    inbox.addEventListener("click", displayInbox);
+    const inboxTab = document.querySelector(".nav__inbox");
+    inboxTab.addEventListener("click", displayInboxTab);
+    
+    const todayTab = document.querySelector(".nav__today");
+    todayTab.addEventListener("click", displayTodayTab);
 
-    const important = document.querySelector(".nav__important");
-    important.addEventListener("click", displayImportant);
+    const upcomingTab = document.querySelector(".nav__upcoming");
+    upcomingTab.addEventListener("click", displayUpcomingTab);
+
+    const importantTab = document.querySelector(".nav__important");
+    importantTab.addEventListener("click", displayImportantTab);
 };
 
-const displayInbox = (e) => {
+const displayInboxTab = () => {
+    removeAddTask();
     resetTaskList();
 
     projectList.forEach((project) => {
@@ -33,7 +40,16 @@ const displayInbox = (e) => {
     checkForImportantTasks();
 };
 
-const displayImportant = () => {
+const displayTodayTab = () => {
+    removeAddTask();
+};
+
+const displayUpcomingTab = () => {
+    removeAddTask();
+};
+
+const displayImportantTab = () => {
+    removeAddTask();
     resetTaskList();
 
     projectList.forEach((project) => {
@@ -48,6 +64,8 @@ const displayImportant = () => {
 };
 
 const displayProjectTasks = (e) => {
+    showAddTask();
+
     if (e.target.classList.contains("nav__remove-icon")) return;
     resetTaskList();
 
@@ -88,6 +106,16 @@ const getImportantTasksArray = () => {
     return importantTasksArray;
 };
 
+const showAddTask = () => {
+    const addTaskWrapper = document.querySelector(".right-panel__add-task");
+    addTaskWrapper.classList.add("right-panel__add-task--active");
+};
+
+const removeAddTask = () => {
+    const addTaskWrapper = document.querySelector(".right-panel__add-task");
+    addTaskWrapper.classList.remove("right-panel__add-task--active");
+};
+
 const highlightNavTab = (e) => {
     if (e.target.classList.contains("nav__remove-icon")) return;
     if (e.target.classList.contains("nav__add-new-project")) return;
@@ -124,9 +152,10 @@ const resetTaskList = () => {
     taskItems.forEach(task => taskList.removeChild(task));
 };
 
-// This runs when Project is removed from Nav panel
+// This, Inbox page, runs when Project is removed from Nav panel
 const displayDefaultPage = () => {
     resetHeaderTitle();
+    removeAddTask();
 
     const content = document.querySelector(".right-panel");
     const headerTitle = document.createElement("h1");
@@ -137,7 +166,7 @@ const displayDefaultPage = () => {
     const inboxTab = document.querySelector(".nav__inbox");
     inboxTab.classList.add("nav__item--active");
 
-    displayInbox();
+    displayInboxTab();
 };
 
-export { navItemsEventListeners, displayInbox, displayDefaultPage }
+export { navItemsEventListeners, displayInboxTab, displayDefaultPage }

@@ -201,11 +201,12 @@ nav > hr {
     width: 80%;
     margin: 0 auto;
     margin-top: 2.4rem;
+    margin-bottom: 1.2rem;
     font-size: 3rem;
 }
 
 .right-panel__add-task {
-    display: flex;
+    display: none;
     height: fit-content;
     align-items: center;
     width: 80%;
@@ -216,6 +217,10 @@ nav > hr {
     padding: 1rem;
     font-weight: bold;
     border-radius: 5px;
+}
+
+.right-panel__add-task--active {
+    display: flex;
 }
 
 .right-panel__add-task:hover {
@@ -383,6 +388,10 @@ nav > hr {
 }
 
 .task-item__important-icon:hover {
+    background: var(--light-grey);
+}
+
+.task-item__important-icon--active {
     background: var(--light-grey);
 }
 
