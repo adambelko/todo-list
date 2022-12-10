@@ -11,11 +11,14 @@ const navItemsEventListeners = () => {
 
     const projectList = document.querySelectorAll(".nav__project-name");
     projectList.forEach((project) => {
-        project.addEventListener("click", displayProjectTasks)
+        project.addEventListener("click", displayProjectTasks);
     });
 
     const inbox = document.querySelector(".nav__inbox");
     inbox.addEventListener("click", displayInbox);
+
+    const important = document.querySelector(".nav__important");
+    important.addEventListener("click", displayImportant);
 };
 
 const displayInbox = (e) => {
@@ -26,6 +29,22 @@ const displayInbox = (e) => {
             addTask(task.uuid, task.title, task.description, task.dueDate);
         });
     });
+
+    checkForImportantTasks();
+};
+
+const displayImportant = () => {
+    resetTaskList();
+
+    projectList.forEach((project) => {
+        project.taskList.forEach((task) => {
+            if (task.important === true) {
+                addTask(task.uuid, task.title, task.description, task.dueDate);
+            }
+        });
+    });
+
+    checkForImportantTasks();
 };
 
 const displayProjectTasks = (e) => {
@@ -39,6 +58,34 @@ const displayProjectTasks = (e) => {
     projectList[projectIndex].taskList.forEach((task) => {
         addTask(task.uuid, task.title, task.description, task.dueDate);
     });
+
+    checkForImportantTasks();
+};
+
+const checkForImportantTasks = () => {
+    const allTasks = document.querySelectorAll(".right-panel__task-item");
+    const importantTasks = getImportantTasksArray();
+
+    if (importantTasks.length === 0) return;
+
+    for (const task of allTasks) {
+        if (importantTasks.includes(task.dataset.uuid)) {
+            const importantIcon = task.childNodes[2].childNodes[1];
+            importantIcon.classList.add("task-item__important-icon--active");
+        }
+      }
+};
+
+const getImportantTasksArray = () => {
+    const importantTasksArray = [];
+
+    projectList.forEach((project) => {
+        project.taskList.forEach((task) => {
+            if (task.important === true) importantTasksArray.push(task.uuid);
+        });
+    });
+
+    return importantTasksArray;
 };
 
 const highlightNavTab = (e) => {
@@ -68,7 +115,6 @@ const resetHeaderTitle = () => {
     const content = document.querySelector(".right-panel");
     const title = document.querySelector(".right-panel__title");
     content.removeChild(title);
-    // console.log("done")
 };
 
 const resetTaskList = () => {
