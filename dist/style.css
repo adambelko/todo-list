@@ -383,6 +383,10 @@ nav > hr {
     border-radius: 5px;
 }
 
+.task-item__edit-icon--active {
+    background: var(--light-grey);
+}
+
 .task-item__edit-icon:hover {
     background: var(--light-grey);
 }

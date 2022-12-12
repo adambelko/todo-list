@@ -1,4 +1,5 @@
 import { projectList, saveToMemory } from "./createProject";
+import { showTaskForm } from "./createTask";
 
 const prioritiseTask = (e, taskUUID) => {
     const indexes = getIndexData(taskUUID);
@@ -19,8 +20,10 @@ const prioritiseTask = (e, taskUUID) => {
     saveToMemory();
 };
 
-const editTask = () => {
-    //code to come  
+const editTask = (e, title, description, dueDate) => {
+    highlightTaskEditIcon(e);
+    showTaskForm();
+    showTaskFormValues(title, description, dueDate);
 };
 
 const removeTask = (e, taskUUID) => {
@@ -35,6 +38,37 @@ const removeTask = (e, taskUUID) => {
     const thisTask = e.target.parentNode.parentNode;
     taskList.removeChild(thisTask);
 };
+
+const highlightTaskEditIcon = (e) => {
+    e.target.classList.add("task-item__edit-icon--active");
+};
+
+const showTaskFormValues = (title, description, dueDate) => {
+    const taskForm = document.querySelector(".right-panel__task-form");
+    taskForm.classList.add("right-panel__task-form-edit");
+
+    const taskTitle = document.querySelector(".task-form__title");
+    taskTitle.value = title;
+
+    const taskDescription = document.querySelector(".task-form__description");
+    taskDescription.value = description;
+
+    const taskDueDate = document.querySelector(".task-form__date");
+    taskDueDate.value = getTaskDueDate(dueDate);
+};
+
+const updateTaskValues = (taskUUID, title, description, dueDate) => {
+    const indexes = getIndexData(taskUUID);
+    const taskIndex = indexes.taskIndex;
+    const projectIndex = indexes.projectIndex;
+
+    projectList[projectIndex].taskList[taskIndex].title = title;
+    projectList[projectIndex].taskList[taskIndex].description = description;
+    projectList[projectIndex].taskList[taskIndex].dueDate = dueDate;
+    saveToMemory();
+};
+
+const getTaskDueDate = (date) => date === "No Due Date" ? "" : date;
 
 const getIndexData = (taskUUID) => {
     let taskIndex;
@@ -52,4 +86,4 @@ const getIndexData = (taskUUID) => {
     return {taskIndex, projectIndex};
 };
 
-export { prioritiseTask, editTask, removeTask };
+export { prioritiseTask, editTask, removeTask, updateTaskValues };
