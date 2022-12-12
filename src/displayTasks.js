@@ -11,7 +11,7 @@ const navItemsEventListeners = () => {
 
     const projectList = document.querySelectorAll(".nav__project-name");
     projectList.forEach((project) => {
-        project.addEventListener("click", displayProjectTasks);
+        project.addEventListener("click", displayProject);
     });
 
     const inboxTab = document.querySelector(".nav__inbox");
@@ -63,15 +63,15 @@ const displayImportantTab = () => {
     checkForImportantTasks();
 };
 
-const displayProjectTasks = (e) => {
+const displayProject = (e) => {
     showAddTask();
 
+    // if clicked on project remove icon, do nothing
     if (e.target.classList.contains("nav__remove-icon")) return;
-    resetTaskList();
 
-    let uuid = e.target.dataset.uuid;
-    if (uuid === undefined) uuid = e.target.parentNode.dataset.uuid;
-    const projectIndex = projectList.findIndex((object) => object.uuid === uuid);
+    resetTaskList();
+    const projectUUID = document.querySelector(".nav__item--active").dataset.uuid;
+    const projectIndex = projectList.findIndex((object) => object.uuid === projectUUID);
 
     projectList[projectIndex].taskList.forEach((task) => {
         addTask(task.uuid, task.title, task.description, task.dueDate);
@@ -169,4 +169,22 @@ const displayDefaultPage = () => {
     displayInboxTab();
 };
 
-export { navItemsEventListeners, displayInboxTab, displayDefaultPage }
+const displayCurrentPage = (e) => {
+    const inboxTab = document.querySelector(".nav__inbox");
+    const todayTab = document.querySelector(".nav__today");
+    const upcomingTab = document.querySelector(".nav__upcoming");
+    const importantTab = document.querySelector(".nav__important");
+    const projectList = document.querySelectorAll(".nav__project-name");
+    const activeTab = document.querySelector(".nav__item--active");
+
+    if (activeTab.contains(inboxTab)) return displayInboxTab();
+    if (activeTab.contains(todayTab)) return displayTodayTab();
+    if (activeTab.contains(upcomingTab)) return displayUpcomingTab();
+    if (activeTab.contains(importantTab)) return displayImportantTab();
+    projectList.forEach((project) => {
+        if (activeTab.contains(project)) displayProject(e);
+    });
+};
+
+
+export { navItemsEventListeners, displayInboxTab, displayDefaultPage, displayCurrentPage }

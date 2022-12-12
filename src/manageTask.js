@@ -40,7 +40,15 @@ const removeTask = (e, taskUUID) => {
 };
 
 const highlightTaskEditIcon = (e) => {
+    resetHighlightTaskEditIcon();
     e.target.classList.add("task-item__edit-icon--active");
+};
+
+const resetHighlightTaskEditIcon = () => {
+    const allIcons = document.querySelectorAll(".task-item__edit-icon--active");
+    allIcons.forEach((icon) => {
+        icon.classList.remove("task-item__edit-icon--active");
+    });
 };
 
 const showTaskFormValues = (title, description, dueDate) => {
@@ -86,4 +94,5 @@ const getIndexData = (taskUUID) => {
     return {taskIndex, projectIndex};
 };
 
-export { prioritiseTask, editTask, removeTask, updateTaskValues };
+export { prioritiseTask, editTask, removeTask, 
+    updateTaskValues, resetHighlightTaskEditIcon };

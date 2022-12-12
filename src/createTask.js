@@ -1,6 +1,7 @@
 import {projectList, saveToMemory } from "./createProject";
-import {prioritiseTask, editTask, removeTask, updateTaskValues } from "./manageTask";
-import { displayDefaultPage } from "./displayTasks";
+import {prioritiseTask, editTask, removeTask,
+     updateTaskValues, resetHighlightTaskEditIcon } from "./manageTask";
+import { displayCurrentPage } from "./displayTasks";
 
 const addTaskEventListeners = () => {
     const addTask = document.querySelectorAll(".right-panel__add-task");
@@ -23,6 +24,7 @@ const hideTaskForm = () => {
     const addTaskForm = document.querySelector(".right-panel__task-form");
     addTaskForm.classList.remove("right-panel__task-form--active");
     clearFormInput();
+    resetHighlightTaskEditIcon();
 };
 
 const clearFormInput = () => {
@@ -45,15 +47,15 @@ const processTaskFormInput = (e) => {
     const description = getTaskInputValue("description");
     const dueDate = getTaskDueDate();
 
-    // In case we are using task form for editing a specific task
+    // In case we are using the form for editing a specific task
     const taskUUID = checkForActiveEditIcon();
     if (taskUUID !== false){
         updateTaskValues(taskUUID, title, description, dueDate);
         hideTaskForm();
-        return displayDefaultPage();
+        return displayCurrentPage(e);
     }
 
-    // Adding fresh new task
+    // Adding a fresh new task
     const newTask = CreateTask(id, title, description, dueDate);
     projectList[projectIndex].taskList.push(newTask);
     saveToMemory();
