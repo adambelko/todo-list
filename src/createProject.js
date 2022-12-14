@@ -2,14 +2,14 @@ import { navItemsEventListeners, displayDefaultPage } from "./displayTasks";
 
 // Event listeners for elements in Add New Project Form
 const newProjectEventListeners = () => {
-    const addNewProject = document.querySelectorAll(".nav__add-new-project");
-    addNewProject.forEach((el) => el.addEventListener("click", showProjectForm));
+    const addNewPrj = document.querySelectorAll(".nav__add-new-project");
+    addNewPrj.forEach((el) => el.addEventListener("click", showProjectForm));
 
-    const projectFormCancellBtn = document.querySelector(".nav__form-cancell-btn");
-    projectFormCancellBtn.addEventListener("click", hideProjectForm);
+    const prjFormCancellBtn = document.querySelector(".nav__form-cancell-btn");
+    prjFormCancellBtn.addEventListener("click", hideProjectForm);
 
-    const projectFormAddBtn = document.querySelector(".nav__form-add-btn");
-    projectFormAddBtn.addEventListener("click", processProjectFormInput);
+    const prjFormAddBtn = document.querySelector(".nav__form-add-btn");
+    prjFormAddBtn.addEventListener("click", processProjectFormInput);
 
     displayProjectList(projectList);
 };
@@ -53,8 +53,13 @@ const getProjectName = () => {
     return makeFirstLetterCap(formInput);
 };
 
-const makeFirstLetterCap = (input) => input.charAt(0).toUpperCase() + input.slice(1);
-const clearFormInput = () => document.querySelector(".nav__form-input").value = "";
+const makeFirstLetterCap = (input) => {
+    input.charAt(0).toUpperCase() + input.slice(1);
+};
+
+const clearFormInput = () => {
+    document.querySelector(".nav__form-input").value = "";
+};
 
 const saveToMemory = () => {
     const convertedProject = JSON.stringify(projectList);
@@ -94,7 +99,9 @@ const addProject = (name, id) => {
 
 const removeProject = (e) => {
     const uuid = e.target.parentNode.dataset.uuid;
-    const projectIndex = projectList.findIndex((object) => object.uuid === uuid);
+    const projectIndex = projectList.findIndex((object) => {
+        object.uuid === uuid
+    });
     projectList.splice(projectIndex, 1);
     saveToMemory();
 

@@ -1,17 +1,17 @@
 import {projectList, saveToMemory } from "./createProject";
 import {prioritiseTask, editTask, removeTask,
-     updateTaskValues, resetHighlightTaskEditIcon } from "./manageTask";
+    updateTaskValues, resetHighlightTaskEditIcon } from "./manageTask";
 import { displayCurrentPage } from "./displayTasks";
 
 const addTaskEventListeners = () => {
     const addTask = document.querySelectorAll(".right-panel__add-task");
     addTask.forEach((el) => el.addEventListener("click", showTaskForm));
 
-    const AddTaskFormCancellBtn = document.querySelector(".add-task__cancell-btn");
-    AddTaskFormCancellBtn.addEventListener("click", hideTaskForm);
+    const taskFormCancelBtn = document.querySelector(".add-task__cancell-btn");
+    taskFormCancelBtn.addEventListener("click", hideTaskForm);
 
-    const addTaskFormAddBtn = document.querySelector(".add-task__add-btn");
-    addTaskFormAddBtn.addEventListener("click", processTaskFormInput);
+    const taskFormAddBtn = document.querySelector(".add-task__add-btn");
+    taskFormAddBtn.addEventListener("click", processTaskFormInput);
 };
 
 const showTaskForm = () => {
@@ -64,8 +64,11 @@ const processTaskFormInput = (e) => {
 };
 
 const getProjectIndex = () => {
-    const uuid = document.querySelector(".nav__item--active").dataset.uuid;
-    const projectIndex = projectList.findIndex((object) => object.uuid === uuid);
+    const projectUUID = document.querySelector(".nav__item--active");
+    projectUUID = projectUUID.dataset.uuid;
+    const projectIndex = projectList.findIndex((project) => {
+        project.uuid === projectUUID;
+    });
     return projectIndex;
 };
 
@@ -118,7 +121,9 @@ const addTask = (id, title, description, dueDate) => {
     iconEdit.src = "../dist/img/edit.png";
     iconEdit.className = "task-item__edit-icon";
     iconWrapper.appendChild(iconEdit);
-    iconEdit.addEventListener("click", (e) => editTask(e, title, description, dueDate));
+    iconEdit.addEventListener("click", (e) => {
+        editTask(e, title, description, dueDate)
+    });
 
     const iconRemove = document.createElement("img");
     iconRemove.src = "../dist/img/nav_remove.png";
@@ -130,10 +135,10 @@ const addTask = (id, title, description, dueDate) => {
 };
 
 const checkForActiveEditIcon = () => {
-    const activeEditIcon = document.querySelector(".task-item__edit-icon--active");
-    if (!activeEditIcon) return false;
-    const uuid = activeEditIcon.parentNode.parentNode.dataset.uuid;
-    if (activeEditIcon) return uuid;
+    const editIcon = document.querySelector(".task-item__edit-icon--active");
+    if (!editIcon) return false;
+    const uuid = editIcon.parentNode.parentNode.dataset.uuid;
+    if (editIcon) return uuid;
 };
 
 const getTaskInputValue = (name) => {

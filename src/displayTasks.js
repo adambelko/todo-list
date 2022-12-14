@@ -66,12 +66,15 @@ const displayImportantTab = () => {
 const displayProject = (e) => {
     showAddTask();
 
-    // if clicked on project remove icon, do nothing
+    // if clicked on project remove icon, return the function
     if (e.target.classList.contains("nav__remove-icon")) return;
 
     resetTaskList();
-    const projectUUID = document.querySelector(".nav__item--active").dataset.uuid;
-    const projectIndex = projectList.findIndex((object) => object.uuid === projectUUID);
+    const projectUUID = document.querySelector(".nav__item--active");
+    projectUUID = projectUUID.dataset.uuid;
+    const projectIndex = projectList.findIndex((object) => {
+        object.uuid === projectUUID
+    });
 
     projectList[projectIndex].taskList.forEach((task) => {
         addTask(task.uuid, task.title, task.description, task.dueDate);
@@ -187,4 +190,5 @@ const displayCurrentPage = (e) => {
 };
 
 
-export { navItemsEventListeners, displayInboxTab, displayDefaultPage, displayCurrentPage }
+export { navItemsEventListeners, displayInboxTab, displayDefaultPage,
+    displayCurrentPage }
