@@ -70,10 +70,10 @@ const displayProject = (e) => {
     if (e.target.classList.contains("nav__remove-icon")) return;
 
     resetTaskList();
-    const projectUUID = document.querySelector(".nav__item--active");
+    let projectUUID = document.querySelector(".nav__item--active");
     projectUUID = projectUUID.dataset.uuid;
     const projectIndex = projectList.findIndex((object) => {
-        object.uuid === projectUUID
+        return object.uuid === projectUUID;
     });
 
     projectList[projectIndex].taskList.forEach((task) => {
@@ -191,4 +191,4 @@ const displayCurrentPage = (e) => {
 
 
 export { navItemsEventListeners, displayInboxTab, displayDefaultPage,
-    displayCurrentPage }
+    displayCurrentPage };

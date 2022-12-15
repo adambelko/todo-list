@@ -84,17 +84,17 @@ const getIndexData = (taskUUID) => {
 
     for (let i = 0; i < projectList.length; i++) {
         let findIndex = projectList[i].taskList.findIndex((task) => {
-            task.uuid === taskUUID
-    });
+            return task.uuid === taskUUID;
+        });
         if (findIndex >= 0) {
             taskIndex = findIndex;
             projectIndex = i;
             break;
         }
     }
-
     return {taskIndex, projectIndex};
 };
 
 export { prioritiseTask, editTask, removeTask, 
     updateTaskValues, resetHighlightTaskEditIcon };
+

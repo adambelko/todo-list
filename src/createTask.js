@@ -64,10 +64,10 @@ const processTaskFormInput = (e) => {
 };
 
 const getProjectIndex = () => {
-    const projectUUID = document.querySelector(".nav__item--active");
+    let projectUUID = document.querySelector(".nav__item--active");
     projectUUID = projectUUID.dataset.uuid;
     const projectIndex = projectList.findIndex((project) => {
-        project.uuid === projectUUID;
+        return project.uuid === projectUUID;
     });
     return projectIndex;
 };

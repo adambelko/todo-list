@@ -100,7 +100,7 @@ const addProject = (name, id) => {
 const removeProject = (e) => {
     const uuid = e.target.parentNode.dataset.uuid;
     const projectIndex = projectList.findIndex((object) => {
-        object.uuid === uuid
+        return object.uuid === uuid
     });
     projectList.splice(projectIndex, 1);
     saveToMemory();
