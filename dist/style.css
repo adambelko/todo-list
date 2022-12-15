@@ -5,7 +5,8 @@
 
 :root {
     --white: #ffffff;
-    --light-grey: #efeded;
+    --light-grey: #f7f4f4;
+    --darker-grey: #c6c5c5;
     --blue: #59c4f2;
     --text: #4d4d4d;
     --hover: #e3e2e2;
@@ -345,6 +346,14 @@ nav > hr {
     width: 80%;
     padding: 1rem;
     border-radius: 5px;
+}
+
+.right-panel__task-item:hover {
+    background: var(--darker-grey);
+}
+
+.right-panel__task-item--active {
+    background: var(--darker-grey);
 }
 
 .right-panel__task-left{

@@ -54,7 +54,7 @@ const getProjectName = () => {
 };
 
 const makeFirstLetterCap = (input) => {
-    input.charAt(0).toUpperCase() + input.slice(1);
+    return input.charAt(0).toUpperCase() + input.slice(1);
 };
 
 const clearFormInput = () => {

@@ -1,6 +1,6 @@
 import {projectList, saveToMemory } from "./createProject";
-import {prioritiseTask, editTask, removeTask,
-    updateTaskValues, resetHighlightTaskEditIcon } from "./manageTask";
+import {prioritiseTask, editTask, removeTask, updateTaskValues,
+    resetHighlightedTask, resetHighlightedTaskEditIcon } from "./manageTask";
 import { displayCurrentPage } from "./displayTasks";
 
 const addTaskEventListeners = () => {
@@ -24,7 +24,8 @@ const hideTaskForm = () => {
     const addTaskForm = document.querySelector(".right-panel__task-form");
     addTaskForm.classList.remove("right-panel__task-form--active");
     clearFormInput();
-    resetHighlightTaskEditIcon();
+    resetHighlightedTask();
+    resetHighlightedTaskEditIcon();
 };
 
 const clearFormInput = () => {

@@ -21,6 +21,7 @@ const prioritiseTask = (e, taskUUID) => {
 };
 
 const editTask = (e, title, description, dueDate) => {
+    highlightTask(e);
     highlightTaskEditIcon(e);
     showTaskForm();
     showTaskFormValues(title, description, dueDate);
@@ -39,12 +40,25 @@ const removeTask = (e, taskUUID) => {
     taskList.removeChild(thisTask);
 };
 
+const highlightTask = (e) => {
+    resetHighlightedTask();
+    const taskLiEl = e.target.parentNode.parentNode;
+    taskLiEl.classList.add("right-panel__task-item--active");
+};
+
+const resetHighlightedTask = () => {
+    const highTask = document.querySelectorAll(".right-panel__task-item--active");
+    highTask.forEach((task) => {
+        task.classList.remove("right-panel__task-item--active");
+    });
+};
+
 const highlightTaskEditIcon = (e) => {
-    resetHighlightTaskEditIcon();
+    resetHighlightedTaskEditIcon();
     e.target.classList.add("task-item__edit-icon--active");
 };
 
-const resetHighlightTaskEditIcon = () => {
+const resetHighlightedTaskEditIcon = () => {
     const allIcons = document.querySelectorAll(".task-item__edit-icon--active");
     allIcons.forEach((icon) => {
         icon.classList.remove("task-item__edit-icon--active");
@@ -96,5 +110,4 @@ const getIndexData = (taskUUID) => {
 };
 
 export { prioritiseTask, editTask, removeTask, 
-    updateTaskValues, resetHighlightTaskEditIcon };
-
+    updateTaskValues, resetHighlightedTask, resetHighlightedTaskEditIcon };
