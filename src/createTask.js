@@ -1,5 +1,5 @@
+import { format, parseISO } from "date-fns";
 import { projectList, saveToMemory } from "./createProject";
-
 import { prioritiseTask, editTask, removeTask, updateTaskValues,
     resetHighlightedTask, resetHighlightedTaskEditIcon,
     checkTaskCheckbox } from "./manageTask";
@@ -79,8 +79,9 @@ const getProjectIndex = () => {
 };
 
 const getTaskDueDate = () => {
-    const dueDate = document.querySelector(".task-form__date").value;
-    return (dueDate === "") ? "No Due Date" : dueDate;  
+    const input = document.querySelector(".task-form__date").value;
+    const dueDate = parseISO(input);
+    return (dueDate === "") ? "No Due Date" : format(dueDate, "dd/MM/YYY");
 };
 
 const addTask = (id, title, description, dueDate) => {

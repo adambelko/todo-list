@@ -1,3 +1,4 @@
+import { format, parse } from "date-fns";
 import { projectList, saveToMemory } from "./createProject";
 import { showTaskForm } from "./createTask";
 
@@ -107,7 +108,10 @@ const updateTaskValues = (taskUUID, title, description, dueDate) => {
     saveToMemory();
 };
 
-const getTaskDueDate = (date) => date === "No Due Date" ? "" : date;
+const getTaskDueDate = (date) => {
+    const parsedDate = parse(date, "dd/MM/yyyy", new Date());
+    return (date === "No Due Date") ? "" : format(parsedDate, "yyyy-MM-dd");
+};
 
 const getIndexData = (taskUUID) => {
     let taskIndex;
