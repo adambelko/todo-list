@@ -1,5 +1,7 @@
 import { projectList } from "./createProject";
 import { addTask } from "./createTask";
+import { getTaskDueDate } from "./manageTask";
+import { isToday, parseISO, addDays, isWithinInterval } from 'date-fns'
 
 // Event Listeners for Nav tabs and Projects
 const navItemsEventListeners = () => {
@@ -42,10 +44,38 @@ const displayInboxTab = () => {
 
 const displayTodayTab = () => {
     removeAddTask();
+    resetTaskList();
+
+    projectList.forEach((project) => {
+        project.taskList.forEach((task) => {
+            const date = getTaskDueDate(task.dueDate);
+            const parsedDate = parseISO(date);
+            if (isToday(parsedDate)) {
+                addTask(task.uuid, task.title, task.description, task.dueDate);
+            }
+        });
+    })
+
+    checkForCheckedTasks();
+    checkForImportantTasks();
 };
 
 const displayUpcomingTab = () => {
     removeAddTask();
+    resetTaskList();
+
+    projectList.forEach((project) => {
+        project.taskList.forEach((task) => {
+            const date = getTaskDueDate(task.dueDate);
+            const parsedDate = parseISO(date);
+            if (checkForNextWeek(parsedDate)) {
+                addTask(task.uuid, task.title, task.description, task.dueDate);
+            }
+        });
+    })
+
+    checkForCheckedTasks();
+    checkForImportantTasks();    
 };
 
 const displayImportantTab = () => {
@@ -83,6 +113,16 @@ const displayProject = (e) => {
 
     checkForCheckedTasks();
     checkForImportantTasks();
+};
+
+// Check if the date is within the next 7 days
+const checkForNextWeek = (date) => {
+    const today = new Date();
+    const plusSevenDays = addDays(today, 7);
+    return isWithinInterval(date, {
+        start: today,
+        end: plusSevenDays
+    })
 };
 
 const checkForCheckedTasks = () => {
