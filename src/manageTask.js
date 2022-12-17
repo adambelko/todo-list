@@ -1,6 +1,23 @@
 import { projectList, saveToMemory } from "./createProject";
 import { showTaskForm } from "./createTask";
 
+const checkTaskCheckbox = (taskUUID) => {
+    const indexes = getIndexData(taskUUID);
+    const taskIndex = indexes.taskIndex;
+    const projectIndex = indexes.projectIndex;
+    
+    let checked = projectList[projectIndex].taskList[taskIndex].checked;
+
+    if (checked === false) {
+        projectList[projectIndex].taskList[taskIndex].checked = true;
+        
+    } else {
+        projectList[projectIndex].taskList[taskIndex].checked = false;
+    }
+    
+    saveToMemory();
+};
+
 const prioritiseTask = (e, taskUUID) => {
     const indexes = getIndexData(taskUUID);
     const taskIndex = indexes.taskIndex;
@@ -100,6 +117,7 @@ const getIndexData = (taskUUID) => {
         let findIndex = projectList[i].taskList.findIndex((task) => {
             return task.uuid === taskUUID;
         });
+
         if (findIndex >= 0) {
             taskIndex = findIndex;
             projectIndex = i;
@@ -110,4 +128,5 @@ const getIndexData = (taskUUID) => {
 };
 
 export { prioritiseTask, editTask, removeTask, 
-    updateTaskValues, resetHighlightedTask, resetHighlightedTaskEditIcon };
+    updateTaskValues, resetHighlightedTask, resetHighlightedTaskEditIcon,
+    checkTaskCheckbox };

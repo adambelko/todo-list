@@ -36,7 +36,7 @@ const displayInboxTab = () => {
             addTask(task.uuid, task.title, task.description, task.dueDate);
         });
     });
-
+    checkForCheckedTasks();
     checkForImportantTasks();
 };
 
@@ -60,6 +60,7 @@ const displayImportantTab = () => {
         });
     });
 
+    checkForCheckedTasks();
     checkForImportantTasks();
 };
 
@@ -80,15 +81,43 @@ const displayProject = (e) => {
         addTask(task.uuid, task.title, task.description, task.dueDate);
     });
 
+    checkForCheckedTasks();
     checkForImportantTasks();
+};
+
+const checkForCheckedTasks = () => {
+    const allTasks = document.querySelectorAll(".right-panel__task-item");
+    const checkedTasks = getCheckedTaskArray();
+
+    if (checkedTasks.length === 0) return;
+
+    for (const task of allTasks) {
+        if (checkedTasks.includes(task.dataset.uuid)) {
+            const checkbox = task.childNodes[0]
+            checkbox.checked = true;
+        }
+      }
+};
+
+// Return an array with task uuid's that match condition checked === true;
+const getCheckedTaskArray = () => {
+    const checkedTasksArray = [];
+
+    projectList.forEach((project) => {
+        project.taskList.forEach((task) => {
+            if (task.checked === true) checkedTasksArray.push(task.uuid);
+        });
+    });
+
+    return checkedTasksArray;
 };
 
 const checkForImportantTasks = () => {
     const allTasks = document.querySelectorAll(".right-panel__task-item");
-    const importantTasks = getImportantTasksArray();
-
+    const importantTasks = getImportantTaskArray();
+    
     if (importantTasks.length === 0) return;
-
+    
     for (const task of allTasks) {
         if (importantTasks.includes(task.dataset.uuid)) {
             const importantIcon = task.childNodes[2].childNodes[1];
@@ -97,7 +126,8 @@ const checkForImportantTasks = () => {
       }
 };
 
-const getImportantTasksArray = () => {
+// Return an array with task uuid's that match condition importan === true;
+const getImportantTaskArray = () => {
     const importantTasksArray = [];
 
     projectList.forEach((project) => {

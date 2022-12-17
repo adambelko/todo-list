@@ -1,6 +1,9 @@
-import {projectList, saveToMemory } from "./createProject";
-import {prioritiseTask, editTask, removeTask, updateTaskValues,
-    resetHighlightedTask, resetHighlightedTaskEditIcon } from "./manageTask";
+import { projectList, saveToMemory } from "./createProject";
+
+import { prioritiseTask, editTask, removeTask, updateTaskValues,
+    resetHighlightedTask, resetHighlightedTaskEditIcon,
+    checkTaskCheckbox } from "./manageTask";
+
 import { displayCurrentPage } from "./displayTasks";
 
 const addTaskEventListeners = () => {
@@ -35,9 +38,10 @@ const clearFormInput = () => {
 
 //Factory for new tasks
 const CreateTask = (uuid, title, description, dueDate) => {
+    const checked = false;
     const important = false;
 
-    return {uuid, title, description, important, dueDate};
+    return {uuid, title, description, dueDate, checked, important};
 };
 
 const processTaskFormInput = (e) => {
@@ -67,6 +71,7 @@ const processTaskFormInput = (e) => {
 const getProjectIndex = () => {
     let projectUUID = document.querySelector(".nav__item--active");
     projectUUID = projectUUID.dataset.uuid;
+
     const projectIndex = projectList.findIndex((project) => {
         return project.uuid === projectUUID;
     });
@@ -85,9 +90,11 @@ const addTask = (id, title, description, dueDate) => {
     taskItem.dataset.uuid = id;
     taskList.appendChild(taskItem);
     
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    taskItem.appendChild(checkbox);
+    const taskCheckbox = document.createElement("input");
+    taskCheckbox.type = "checkbox";
+    taskCheckbox.className = "right-panel__task-checkbox";
+    taskItem.appendChild(taskCheckbox);
+    taskCheckbox.addEventListener("click", () => checkTaskCheckbox(id));
 
     const textWrapper = document.createElement("div");
     textWrapper.className = "right-panel__task-text-wrapper";
