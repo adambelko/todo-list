@@ -356,9 +356,15 @@ nav > hr {
     background: var(--darker-grey);
 }
 
-.right-panel__task-left{
+.right-panel__task-text-wrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-panel__task-checkbox {
+    width: 1.7rem;
+    height: auto;
 }
 
 .right-panel__task-title,
