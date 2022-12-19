@@ -60,6 +60,7 @@ const displayTodayTab = () => {
     checkForImportantTasks();
 };
 
+// Display tasks if due date is within next 7 days
 const displayUpcomingTab = () => {
     removeAddTask();
     resetTaskList();
@@ -115,7 +116,8 @@ const displayProject = (e) => {
     checkForImportantTasks();
 };
 
-// Check if the date is within the next 7 days
+// Check if the date that's passed as an argument is within the
+// next 7 days from today and return boolean value
 const checkForNextWeek = (date) => {
     const today = new Date();
     const plusSevenDays = addDays(today, 7);
@@ -125,6 +127,8 @@ const checkForNextWeek = (date) => {
     })
 };
 
+// Compare an array of checked tasks against all tasks, if there is any
+// match, check the checkbox of the task
 const checkForCheckedTasks = () => {
     const allTasks = document.querySelectorAll(".right-panel__task-item");
     const checkedTasks = getCheckedTaskArray();
@@ -152,6 +156,7 @@ const getCheckedTaskArray = () => {
     return checkedTasksArray;
 };
 
+// Same logic as checkbox is applied here
 const checkForImportantTasks = () => {
     const allTasks = document.querySelectorAll(".right-panel__task-item");
     const importantTasks = getImportantTaskArray();
@@ -166,7 +171,6 @@ const checkForImportantTasks = () => {
       }
 };
 
-// Return an array with task uuid's that match condition importan === true;
 const getImportantTaskArray = () => {
     const importantTasksArray = [];
 
@@ -179,16 +183,19 @@ const getImportantTaskArray = () => {
     return importantTasksArray;
 };
 
+// This runs only when project tab is currently open
 const showAddTask = () => {
     const addTaskWrapper = document.querySelector(".right-panel__add-task");
     addTaskWrapper.classList.add("right-panel__add-task--active");
 };
 
+// Otherwise there is no option of adding a new task, therefore adding is removed
 const removeAddTask = () => {
     const addTaskWrapper = document.querySelector(".right-panel__add-task");
     addTaskWrapper.classList.remove("right-panel__add-task--active");
 };
 
+// Change bg of current Nav Tab
 const highlightNavTab = (e) => {
     if (e.target.classList.contains("nav__remove-icon")) return;
     if (e.target.classList.contains("nav__add-new-project")) return;
@@ -199,6 +206,7 @@ const highlightNavTab = (e) => {
     e.target.closest("li").classList.add("nav__item--active");
 };
 
+// Display a name of a current tab
 const displayHeader = (e) => {
     if (e.target.classList.contains("nav__add-new-project")) return;
     if (e.target.classList.contains("nav__remove-icon")) return;
@@ -212,6 +220,7 @@ const displayHeader = (e) => {
     content.prepend(headerTitle);
 };
 
+// Before apending a new title, reset the old one
 const resetHeaderTitle = () => {
     const content = document.querySelector(".right-panel");
     const title = document.querySelector(".right-panel__title");
@@ -258,7 +267,6 @@ const displayCurrentPage = (e) => {
         if (activeTab.contains(project)) displayProject(e);
     });
 };
-
 
 export { navItemsEventListeners, displayInboxTab, displayDefaultPage,
     displayCurrentPage };

@@ -61,11 +61,13 @@ const clearFormInput = () => {
     document.querySelector(".nav__form-input").value = "";
 };
 
+// Local Storage
 const saveToMemory = () => {
     const convertedProject = JSON.stringify(projectList);
     localStorage.setItem("myProjects", convertedProject);
 };
 
+// Render all projects into Nav Projects section
 const displayProjectList = (array) => {
     array.forEach((obj) => addProject(obj.projectName, obj.uuid));
 };

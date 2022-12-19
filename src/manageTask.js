@@ -2,6 +2,7 @@ import { format, parse } from "date-fns";
 import { projectList, saveToMemory } from "./createProject";
 import { showTaskForm } from "./createTask";
 
+// check for "checked" value in local storage and return opposite
 const checkTaskCheckbox = (taskUUID) => {
     const indexes = getIndexData(taskUUID);
     const taskIndex = indexes.taskIndex;
@@ -19,6 +20,8 @@ const checkTaskCheckbox = (taskUUID) => {
     saveToMemory();
 };
 
+// Check for a value in local storage and add or remove class
+// based on a condition
 const prioritiseTask = (e, taskUUID) => {
     const indexes = getIndexData(taskUUID);
     const taskIndex = indexes.taskIndex;
@@ -58,19 +61,22 @@ const removeTask = (e, taskUUID) => {
     taskList.removeChild(thisTask);
 };
 
+// Change bg color of a task while editing the task
 const highlightTask = (e) => {
     resetHighlightedTask();
     const taskLiEl = e.target.parentNode.parentNode;
     taskLiEl.classList.add("right-panel__task-item--active");
 };
 
+// Look for any highlighted task and reset bg color to default if any is found
 const resetHighlightedTask = () => {
-    const highTask = document.querySelectorAll(".right-panel__task-item--active");
-    highTask.forEach((task) => {
+    const tasks = document.querySelectorAll(".right-panel__task-item--active");
+    tasks.forEach((task) => {
         task.classList.remove("right-panel__task-item--active");
     });
 };
 
+// When clicked on task edit icon, change its bg color 
 const highlightTaskEditIcon = (e) => {
     resetHighlightedTaskEditIcon();
     e.target.classList.add("task-item__edit-icon--active");
@@ -83,6 +89,7 @@ const resetHighlightedTaskEditIcon = () => {
     });
 };
 
+// Bring up current values into task form for editing
 const showTaskFormValues = (title, description, dueDate) => {
     const taskForm = document.querySelector(".right-panel__task-form");
     taskForm.classList.add("right-panel__task-form-edit");
@@ -97,6 +104,7 @@ const showTaskFormValues = (title, description, dueDate) => {
     taskDueDate.value = getTaskDueDate(dueDate);
 };
 
+// Update task with a new values when task form for editing is submitted
 const updateTaskValues = (taskUUID, title, description, dueDate) => {
     const indexes = getIndexData(taskUUID);
     const taskIndex = indexes.taskIndex;
@@ -113,6 +121,7 @@ const getTaskDueDate = (date) => {
     return (date === "No Due Date") ? "" : format(parsedDate, "yyyy-MM-dd");
 };
 
+// Based on task uuid find index values
 const getIndexData = (taskUUID) => {
     let taskIndex;
     let projectIndex;
@@ -133,4 +142,4 @@ const getIndexData = (taskUUID) => {
 
 export { prioritiseTask, editTask, removeTask, 
     updateTaskValues, resetHighlightedTask, resetHighlightedTaskEditIcon,
-    checkTaskCheckbox };
+    checkTaskCheckbox, getTaskDueDate };

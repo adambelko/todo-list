@@ -1,8 +1,8 @@
 import { newProjectEventListeners } from "./createProject";
 import { displayInboxTab, navItemsEventListeners } from "./displayTasks";
-import { addTaskEventListeners } from "./createTask";
+import { taskFormEventListeners } from "./createTask";
 
 newProjectEventListeners();
 navItemsEventListeners();
-addTaskEventListeners();
+taskFormEventListeners();
 displayInboxTab();

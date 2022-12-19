@@ -1,12 +1,13 @@
 import { format, parseISO } from "date-fns";
 import { projectList, saveToMemory } from "./createProject";
+
 import { prioritiseTask, editTask, removeTask, updateTaskValues,
     resetHighlightedTask, resetHighlightedTaskEditIcon,
     checkTaskCheckbox } from "./manageTask";
 
 import { displayCurrentPage } from "./displayTasks";
 
-const addTaskEventListeners = () => {
+const taskFormEventListeners = () => {
     const addTask = document.querySelectorAll(".right-panel__add-task");
     addTask.forEach((el) => el.addEventListener("click", showTaskForm));
 
@@ -48,8 +49,8 @@ const processTaskFormInput = (e) => {
     e.preventDefault();    
     const projectIndex = getProjectIndex();
     const id = self.crypto.randomUUID();
-    const title = getTaskInputValue("title");
-    const description = getTaskInputValue("description");
+    const title = getTaskFormInputValue("title");
+    const description = getTaskFormInputValue("description");
     const dueDate = getTaskDueDate();
 
     // In case we are using the form for editing a specific task
@@ -80,8 +81,9 @@ const getProjectIndex = () => {
 
 const getTaskDueDate = () => {
     const input = document.querySelector(".task-form__date").value;
+    console.log(input)
     const dueDate = parseISO(input);
-    return (dueDate === "") ? "No Due Date" : format(dueDate, "dd/MM/YYY");
+    return (input === "") ? "No Due Date" : format(dueDate, "dd/MM/YYY");
 };
 
 const addTask = (id, title, description, dueDate) => {
@@ -140,9 +142,10 @@ const addTask = (id, title, description, dueDate) => {
     iconWrapper.appendChild(iconRemove);
     iconRemove.addEventListener("click", (e) => removeTask(e, id));
 
-    addTaskEventListeners();
+    taskFormEventListeners();
 };
 
+// Return uuid of a task that's being edited
 const checkForActiveEditIcon = () => {
     const editIcon = document.querySelector(".task-item__edit-icon--active");
     if (!editIcon) return false;
@@ -150,7 +153,7 @@ const checkForActiveEditIcon = () => {
     if (editIcon) return uuid;
 };
 
-const getTaskInputValue = (name) => {
+const getTaskFormInputValue = (name) => {
     const formInput = document.querySelector(`.task-form__${name}`);
     return makeFirstLetterCap(formInput.value);
 };
@@ -159,4 +162,4 @@ const makeFirstLetterCap = (formInput) => {
     return formInput.charAt(0).toUpperCase() + formInput.slice(1);
 };
 
-export { addTaskEventListeners, addTask, showTaskForm };
+export { taskFormEventListeners, addTask, showTaskForm };
