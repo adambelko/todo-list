@@ -81,7 +81,7 @@ const addProject = (name, id) => {
 
     const projectIcon = document.createElement("img");
     projectIcon.className = "nav__icon";
-    projectIcon.src = "./img/nav_project.png";
+    projectIcon.src = "/img/nav_project.png";
     newProject.appendChild(projectIcon);
 
     const projectName = document.createElement("div");
@@ -91,7 +91,7 @@ const addProject = (name, id) => {
 
     const projectRemoveIcon = document.createElement("img");
     projectRemoveIcon.className = "nav__remove-icon";
-    projectRemoveIcon.src = ".img/nav_remove.png";
+    projectRemoveIcon.src = "/img/nav_remove.png";
     projectRemoveIcon.addEventListener("click", removeProject);
     newProject.appendChild(projectRemoveIcon);
 
